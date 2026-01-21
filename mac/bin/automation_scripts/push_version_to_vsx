@@ -1,0 +1,41 @@
+#!/bin/zsh
+
+if [ -z "$1" ]; then
+  echo "Usage: ./publish.sh <version>"
+  exit 1
+fi
+
+VERSION=$1
+TOKEN="a6fb8c46-061c-4bec-b88f-680142ed6d60"
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+  echo "Error: jq is required but not installed."
+  exit 1
+fi
+
+echo "Updating version to $VERSION in package.json..."
+jq --arg v "$VERSION" '.version = $v' package.json > package.tmp.json && mv package.tmp.json package.json
+
+echo "Compiling..."
+npm run compile || { echo "Compilation failed"; exit 1; }
+
+echo "Packaging extension..."
+vsce package || { echo "Packaging failed"; exit 1; }
+
+VSIX_FILE="folder-time-tracker-$VERSION.vsix"
+
+# Rename vsix if necessary (vsce defaults to folder-time-tracker-version.vsix, so this might be redundant)
+if [ -f "$VSIX_FILE" ]; then
+  echo "VSIX file: $VSIX_FILE"
+else
+  echo "Expected VSIX file $VSIX_FILE not found!"
+  exit 1
+fi
+
+echo "Publishing $VSIX_FILE to Open VSX..."
+ovsx publish "$VSIX_FILE" -p "$TOKEN" || { echo "Publish failed"; exit 1; }
+
+echo "Done!"
+
+# Alias: PUSH_EXT

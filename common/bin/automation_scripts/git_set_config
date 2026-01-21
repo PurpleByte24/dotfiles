@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# This script sets PurpleByte's Git user info locally for the current repo.
+# Run this inside the repo folder after cloning or anytime you want to set it.
+
+# Check if current folder is a Git repo
+if [ ! -d ".git" ]; then
+  echo "Error: This folder is not a Git repository."
+  exit 1
+fi
+
+echo "Setting local Git user config for PurpleByte account..."
+
+git config user.name "PurpleByte24"
+git config user.email "purplebyte24@gmail.com"
+
+echo "Local Git user.name set to: $(git config user.name)"
+echo "Local Git user.email set to: $(git config user.email)"
+echo "Done."
+

@@ -1,0 +1,21 @@
+#!/bin/zsh
+
+# Check for .tex files
+tex_files=( *.tex(.N) )
+if (( ${#tex_files[@]} == 0 )); then
+    echo "No .tex files found. Exiting..."
+    exit 0
+fi
+
+# Extensions
+exts=(out aux bcf lof log run.xml synctex.gz toc bbl blg lot)
+
+# Delete files with those extensions
+for ext in $exts; do
+    files=( *.$ext(N) )
+    (( ${#files[@]} )) && rm -f $files
+done
+
+echo "Cleaned up auxiliary LaTeX files."
+
+# Alias: CLEAN_TEX

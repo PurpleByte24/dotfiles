@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+echo 'Opening directory...'
+cd ~/crazyflie
+echo 'Done.'
+
+echo 'Activating virtual environment...'
+source cfvenv311/bin/activate
+echo 'Done.'
+
+echo 'Opening CF Client...'
+cfclient
+
+# Alias: CF

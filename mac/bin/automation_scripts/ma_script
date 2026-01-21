@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+$HOME/bin/automation_scripts/cleanup_tex_aux_files
+
+# Check if Main.tex exist
+if [[ -f "Main.tex" ]]; then
+    count=$(pdftotext -layout Main.pdf - | wc -w)
+    osascript -e "display notification \"Total Words: $count\" with title \"Total Words\""
+fi
+
+# Check if Main.pdf exists and open with Preview
+if [[ -f "Main.pdf" ]]; then
+    open -a Preview "Main.pdf"
+fi
+
+# Remove Cache
+if [[ -d "_minted" ]]; then
+    rm -rf "_minted"
+fi
+# Alias: MA_SCRIPT

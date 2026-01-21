@@ -1,0 +1,227 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "builtin",  // Logo type: auto, builtin, small, file, etc.
+    "source": "macos",  // Built-in logo name or file path
+    "padding": {
+      "top": 0, // Top padding
+      "left": 1,  // Left padding
+      "right": 1  // Right padding
+    },
+    "color": {  // Override logo colors
+      "1": "magenta",
+      "2": "black",
+      "3": "blue",
+      "4": "black",
+      "5": "magenta"
+    }
+  },
+
+  "display": {
+    "brightColor": true,
+    "size": {
+      "binaryPrefix": "si",
+      "ndigits": 1, // digit to keep after decimal point
+      "maxPrefix": "TB" // largest prefix to use
+    },
+
+    "separator": ": ",
+    "key": {
+      "type": "string"   // string, icon, both, or none
+    },
+
+    "bar": {
+      "width": 10,  // Width of percentage bars
+      "char": {
+	"elapsed": "■" // Character for elapsed portion
+      },
+      "charTotal": "-"  // Character for total portion
+    },
+
+    "percent": {
+      "ndigits": 0,
+      "color": {            
+        "green": "green",
+        "yellow": "yellow",
+        "red": "red"
+      }
+    }
+  },
+
+
+  "modules": [
+    {
+      "type": "title",
+      "key": "Host",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "color": {
+        "user": "red",
+        "at": "red",
+        "host": "red"
+      },
+      "fqdn": false // show full host (include domain)
+    },
+    
+    {
+      "type": "separator",
+      "string": "-", 
+      "outputColor": "magenta", 
+      "length": 54
+    },
+
+    {
+      "type": "os",
+      "key": "OS",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{name} {version} '{codename}'"
+    },
+
+    {
+      "type": "host",
+      "key": "Devices",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{name}"
+    },
+
+    {
+      "type": "kernel",
+      "key": "Kernel",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{sysname} {release}"
+    },
+
+    {
+      "type": "uptime",
+      "key": "Runtime",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{days}d, {hours}h, {minutes}m ({boot-time})"
+    },
+
+    {
+      "type": "localip",
+      "key": "Locale IP",
+      "keyColor": "black",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{ipv4}"
+    },
+
+    {
+      "type": "publicip",
+      "key": "Public IP",
+      "keyColor": "black",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{ip} ({location})"
+      
+    },
+
+    {
+      "type": "terminal",
+      "key": "Terminal",
+      "keyColor": "blue",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{pretty-name} {version}"
+    },
+
+    {
+      "type": "shell",
+      "key": "Shell",
+      "keyColor": "blue",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{pretty-name} {version}"
+    },
+
+    {
+      "type": "packages",
+      "key": "Packages",
+      "keyColor": "blue",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{brew-all} installed (with brew)"
+    },
+
+    {
+      "type": "battery",
+      "key": "Battery",
+      "keyColor": "blue",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "percent": {
+        "type": 9
+      },
+      "format": "{capacity} ({status}), Time left: {time-hours}h {time-minutes}m"
+    },
+
+    {
+      "type": "cpu",
+      "key": "CPU",
+      "keyColor": "black",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{name} ({cores-physical}-core)"
+    },
+
+    {
+      "type": "gpu",
+      "key": "GPU",
+      "keyColor": "black",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "format": "{name} ({core-count}-core) [{type}]"
+    },
+
+    {
+      "type": "memory",
+      "key": "RAM",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "percent": {
+        "type": 2,  // 1=number, 2=bar, 3=both, 9=colored number
+        "green": 33,
+        "yellow": 66
+      },    
+      "format": "{percentage-bar} {used} / {total}"
+    },
+
+    {
+      "type": "swap",
+      "key": "Swap",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "outputColor": "white", 
+      "percent": {
+        "type": 2,
+        "green": 33,
+        "yellow": 66
+      },     
+      "format": "{percentage-bar} {used} / {total}"
+    },
+
+    {
+      "type": "disk",
+      "key": "SSD",
+      "keyColor": "magenta",
+      "keyWidth": 12,
+      "outputColor": "white",
+      "percent": {
+        "type": 2,
+        "green": 33,
+        "yellow": 66
+      },
+      "format": "{size-percentage-bar} {size-used} / {size-total}"
+    }
+  ]
+}

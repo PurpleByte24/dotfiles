@@ -1,0 +1,32 @@
+#!/bin/zsh
+
+if [[ -z "$1" ]]; then
+    echo "Usage: $0 [cmatrix|aquarium|pipes]"
+    exit 1
+fi
+
+choice="$1"
+
+# Tell iTerm to go full screen using AppleScript
+osascript -e 'tell application "iTerm" to tell front window to set fullscreen to true'
+
+# Give a short delay for full-screen to apply
+sleep 1
+
+case "$choice" in
+    cmatrix)
+        cmatrix -aBs -u 3 -C red
+        ;;
+    aquarium)
+        asciiquarium
+        ;;
+    pipes)
+        pipes.sh -p 7 -f 20 -r 6000
+        ;;
+    *)
+        echo "Invalid option. Use: cmatrix, aquarium, pipes"
+        exit 1
+        ;;
+esac
+
+# Alias: SS
