@@ -1,7 +1,6 @@
 #!/bin/zsh
 
-alias_file="$HOME/.oh-my-zsh/custom/aliases.zsh"
-
-grep '^alias ' "$alias_file" | sed -E 's/^alias ([^=]+)=.*/\1/'
+alias_file=($HOME/.config/zsh/aliases_*.zsh)
+grep -h '^alias ' $alias_file | sed -E 's/^alias ([^=]+)=.*/\1/'
 
 # Alias: LIST_ALIASES
