@@ -121,22 +121,23 @@ update_grsa_be() {
   git pull
 
   step "Installing dependencies"
-  npm ci
+  npm install
 
   step "Building backend"
   npm run build
 
   step "Deploying to $TARGET"
   rm -rf "$TARGET"/*
-  cp package.json package-lock.json .env "$TARGET"/
+  cp package.json package-lock.json "$TARGET"/
+  cp .env.server "$TARGET/.env"
   cp -r dist "$TARGET"/
 
   cd "$TARGET"
-  npm ci --production
+  npm install --omit=dev
 
   step "Restarting backend"
   pm2 delete grsa-backend || true
-  pm2 start dist/server.js --name grsa-backend --env production
+  pm2 start npm --name grsa-backend -- start 
 
   ok "GRSA backend update complete"
 }

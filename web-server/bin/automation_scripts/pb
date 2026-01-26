@@ -17,10 +17,10 @@ fi
 
 case "$1" in
   -u)
-    "$SCRIPT_DIR/pb_update.sh"
+    "$SCRIPT_DIR/update.sh"
     ;;
   -e)
-    "$SCRIPT_DIR/pb_edit.sh"
+    "$SCRIPT_DIR/edit.sh"
     ;;
   *)
     usage
