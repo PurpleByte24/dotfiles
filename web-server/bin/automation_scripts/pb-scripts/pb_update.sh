@@ -84,7 +84,7 @@ update_grsa_fe() {
   nvm use default > /dev/null
 
   REPO="/home/grsa/github/grsa-fe"
-  TARGET="/var/www/dev-frontend"
+  TARGET="/var/www/grsa-fe"
 
   step "Pulling repository"
   cd "$REPO"
@@ -114,7 +114,7 @@ update_grsa_be() {
   nvm use default > /dev/null
 
   REPO="/home/grsa/github/grsa-be"
-  TARGET="/var/www/dev-backend"
+  TARGET="/var/www/grsa-be"
 
   step "Pulling repository"
   cd "$REPO"
