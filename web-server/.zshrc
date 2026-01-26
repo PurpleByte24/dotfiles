@@ -6,6 +6,11 @@ export EDITOR=vim
 export VISUAL=vim
 
 # ------------------------------------------------------------
+# custom scripts
+# ------------------------------------------------------------
+export PATH="$HOME/bin/automation_scripts:$PATH"
+
+# ------------------------------------------------------------
 # User Zsh config (XDG-compliant)
 # Aliases, functions, env overrides
 # ------------------------------------------------------------
