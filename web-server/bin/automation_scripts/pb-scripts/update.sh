@@ -146,27 +146,63 @@ update_grsa_be() {
 update_grades_fe() {
   title "GRADES frontend"
 
-  REPO="/home/grades/app/grade-compass"
+  sudo -u grades bash <<'EOF'
+  set -e
+
+  REPO="/home/grades/app/grades-fe"
   TARGET="/var/www/grades-fe"
 
-  step "Pulling repository"
   cd "$REPO"
   git pull
 
-  step "Installing dependencies"
   rm -rf node_modules package-lock.json
   npm install
   npm ci
 
-  step "Building frontend"
   npm run build
 
-  step "Deploying to $TARGET"
   rm -rf "$TARGET"/*
   cp -r dist/* "$TARGET"/
+EOF
 
   reload_nginx
   ok "GRADES frontend update complete"
+}
+
+
+update_grades_be() {
+  title "GRADES backend"
+
+  sudo -u grades bash <<'EOF'
+  set -e
+  export NVM_DIR="/home/grades/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  nvm use default > /dev/null
+
+  REPO="/home/grades/app/grades-be"
+  TARGET="/var/www/grades-be"
+
+  cd "$REPO"
+  git pull
+
+  npm install
+
+  npm run build
+
+  rm -rf "$TARGET"/*
+  cp package.json package-lock.json "$TARGET"/
+  cp .env.server "$TARGET/.env"
+  cp -r dist "$TARGET"/
+
+  cd "$TARGET"
+  npm install --omit=dev
+EOF
+  step "Restarting backend"
+
+  sudo -u grades pm2 delete grades-backend || true
+  sudo -u grades pm2 start npm --name grades-backend --start --prefix /var/www/grades-be
+
+  ok "GRADES backend update complete"
 }
 
 # ---------- menus ----------
@@ -191,7 +227,7 @@ while true; do
   menu_title "Update menu"
 
   menu_item "1)" "Update GRSA frontend / backend"
-  menu_item "2)" "Update GRADES frontend"
+  menu_item "2)" "Update GRADES frontend / backend"
   menu_sep
   menu_item "3)" "Reload Cloudflare"
   menu_item "4)" "Reload Nginx"
@@ -224,8 +260,11 @@ while true; do
       selected "GRADES"
       case "$PROJECT_CHOICE" in
         1) update_grades_fe ;;
-        2) warn "Grades has no backend" ;;
-        3) update_grades_fe ;;
+        2) update_grades_be ;;
+        3) 
+	  update_grades_fe
+	  update_grades_be
+	  ;;
       esac
       pause
       ;;
