@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+BASE="$HOME/bin/automation_scripts/purple-scripts"
+
+case "$1" in
+  edit)   "$BASE/edit.sh" ;;
+  update) "$BASE/update.sh" ;;
+  status) "$BASE/status.sh" ;;
+  reload) "$BASE/reload.sh" ;;
+  "")
+    "$BASE/menu.sh"
+    ;;
+  *)
+    echo "Usage: pb [edit|update|status|reload]"
+    exit 1
+    ;;
+esac
