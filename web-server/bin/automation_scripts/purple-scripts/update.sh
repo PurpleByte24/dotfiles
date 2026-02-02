@@ -14,6 +14,7 @@ update_grsa_fe() {
 
   cd "$REPO"
   git pull
+  rm -rf node_modules/
   npm ci
   npm run build
 
@@ -53,6 +54,7 @@ update_grades_fe() {
 
   cd "$REPO"
   git pull
+  rm -rf node_modules/
   npm ci
   npm run build
 
