@@ -7,4 +7,4 @@ alias CF="$s_path/initialize_CF"
 alias RFF="$s_path/run_fastfetch"
 alias PUSH_EXT="$s_path/push_version_to_vsx"
 alias MA_SCRIPT="$s_path/ma_script"
-
+alias K3S_TUNNEL="$s_path/k3s-tunnel"

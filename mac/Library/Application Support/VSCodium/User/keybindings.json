@@ -185,4 +185,18 @@
         "command": "-workbench.view.scm",
         "when": "workbench.scm.active"
     },
+    {
+      "key": "shift+cmd+c",
+      "command": "-workbench.action.terminal.openNativeConsole",
+      "when": "!terminalFocus"
+    },
+    {
+      "key": "shift+cmd+c",
+      "command": "-workbench.action.browser.addElementToChat",
+      "when": "chatIsEnabled && config.chat.sendElementsToChat.enabled && activeEditor == 'workbench.editor.browser'"
+    },
+    {
+      "key": "shift+cmd+c",
+      "command": "workbench.view.extension.claude-dev-ActivityBar"
+    },
 ]

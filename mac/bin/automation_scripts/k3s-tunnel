@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Define the path to your config 
+KUBE_CONFIG="$HOME/.k8s/thinkcentre-config.yaml"
+
+# 1. Check if the config file actually exists
+if [ ! -f "$KUBE_CONFIG" ]; then
+    echo "❌ Error: Config file not found at $KUBE_CONFIG"
+    echo "Make sure you've copied it from the ThinkCentre!"
+    exit 1
+fi
+
+# 2. Check if Tailscale is connected (optional but helpful)
+if ! utun=$(ifconfig | grep -i utun); then
+    echo "⚠️ Warning: Tailscale might not be active."
+fi
+
+echo "🚀 Opening MongoDB tunnel to ThinkCentre..."
+echo "📍 Local: localhost:27017 -> Remote: svc/mongodb:27017"
+echo "Press Ctrl+C to stop the tunnel."
+
+# 3. Run the command using the specific config
+KUBECONFIG="$KUBE_CONFIG" kubectl port-forward -n infra svc/mongodb 27017:27017

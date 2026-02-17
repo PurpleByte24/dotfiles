@@ -53,11 +53,14 @@
 
   "eslint.format.enable": true,
 
+  // Prettier
+  "prettier.printWidth": 500,
+
   // Editor
-  "editor.tabSize": 4,
+  "editor.tabSize": 2,
   "editor.wordWrap": "on",
   "editor.stickyScroll.enabled": false,
-
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   "[javascript]": {
     "editor.tabSize": 2
@@ -72,7 +75,8 @@
   },
 
   "[json]": {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   "editor.insertSpaces": true,
@@ -87,15 +91,15 @@
   "terminal.integrated.cursorStyleInactive": "underline",
 
   // codium window zoom
-"window.zoomLevel": 2.5,
-"zenMode.centerLayout": false,
-"zenMode.hideLineNumbers": false,
-"zenMode.hideStatusBar": false,
-"workbench.iconTheme": "material-icon-theme",
-"workbench.secondarySideBar.defaultVisibility": "hidden",
-"typescript.updateImportsOnFileMove.enabled": "always",
-"explorer.confirmDragAndDrop": false,
-"workbench.editorAssociations": {
-    "*.lockb": "default"
-},
+  "window.zoomLevel": 2.5,
+  "zenMode.centerLayout": false,
+  "zenMode.hideLineNumbers": false,
+  "zenMode.hideStatusBar": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": false,
+  "workbench.editorAssociations": {
+      "*.lockb": "default"
+  },
 }
