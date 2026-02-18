@@ -29,29 +29,29 @@ while true; do
   case "$choice" in
     1)
       title "Applying Grades Frontend"
-      kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/grades-frontend.yaml"
+      sudo kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/grades-frontend.yaml"
       ;;
     2)
       title "Applying Grades Backend"
-      kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/grades-backend.yaml"
+      sudo kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/grades-backend.yaml"
       ;;
     3)
       title "Applying Secrets (Local Only)"
-      kubectl apply -f "$MANIFEST_DIR/secrets.yaml"
+      sudo kubectl apply -f "$MANIFEST_DIR/secrets.yaml"
       ;;
     4)
       title "Applying MongoDB (Infra)"
-      kubectl apply -f "$MANIFEST_DIR/infra/mongo.yaml"
+      sudo kubectl apply -f "$MANIFEST_DIR/infra/mongo.yaml"
       ;;
     5)
       title "Applying Keel (Automation)"
-      kubectl apply -f "$MANIFEST_DIR/infra/keel.yaml"
+      sudo kubectl apply -f "$MANIFEST_DIR/infra/keel.yaml"
       ;;
     a)
       title "Applying EVERYTHING"
-      kubectl apply -f "$MANIFEST_DIR/secrets.yaml"
-      kubectl apply -f "$MANIFEST_DIR/infra/"
-      kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/"
+      sudo kubectl apply -f "$MANIFEST_DIR/secrets.yaml"
+      sudo kubectl apply -f "$MANIFEST_DIR/infra/"
+      sudo kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/"
       ;;
     q)
       echo "Exiting..."
