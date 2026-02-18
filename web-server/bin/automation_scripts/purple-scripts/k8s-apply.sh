@@ -8,14 +8,13 @@ while true; do
   clear
   menu_title "K8s Apply"
 
-  menu_item "1)" "Grades-fe"
-  menu_item "2)" "Grades-be"
-  menu_item "3)" "Secrets"
-  menu_item "4)" "MongoDB"
-  menu_item "5)" "Keel"
+  menu_item "1)" "purplebytes-grades"
+  menu_item "2)" "infra"
+  menu_item "3)" "secrets"
 
   menu_sep
   menu_item "a)" "All"
+
   menu_sep
   menu_item "q)" "Back"
 
@@ -28,24 +27,16 @@ while true; do
 
   case "$choice" in
     1)
-      title "Applying Grades Frontend"
-      sudo kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/grades-frontend.yaml"
+      title "Applying purplebytes-grades"
+      sudo kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/"
       ;;
     2)
-      title "Applying Grades Backend"
-      sudo kubectl apply -f "$MANIFEST_DIR/purplebytes-grades/grades-backend.yaml"
+      title "Applying infra"
+      sudo kubectl apply -f "$MANIFEST_DIR/infra/"
       ;;
     3)
-      title "Applying Secrets (Local Only)"
+      title "Applying Secrets"
       sudo kubectl apply -f "$MANIFEST_DIR/secrets.yaml"
-      ;;
-    4)
-      title "Applying MongoDB (Infra)"
-      sudo kubectl apply -f "$MANIFEST_DIR/infra/mongo.yaml"
-      ;;
-    5)
-      title "Applying Keel (Automation)"
-      sudo kubectl apply -f "$MANIFEST_DIR/infra/keel.yaml"
       ;;
     a)
       title "Applying EVERYTHING"
