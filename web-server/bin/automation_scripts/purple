@@ -8,11 +8,12 @@ case "$1" in
   update) "$BASE/update.sh" ;;
   status) "$BASE/status.sh" ;;
   reload) "$BASE/reload.sh" ;;
+  k8s-apply) "$BASE/k8s-apply.sh" ;;
   "")
     "$BASE/menu.sh"
     ;;
   *)
-    echo "Usage: pb [edit|update|status|reload]"
+    echo "Usage: pb [edit|update|status|reload|k8s-apply]"
     exit 1
     ;;
 esac

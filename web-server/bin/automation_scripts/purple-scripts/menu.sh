@@ -10,6 +10,7 @@ while true; do
   menu_item "2)" "Update"
   menu_item "3)" "Status"
   menu_item "4)" "Reload"
+  menu_item "5)" "K8s Apply"
   menu_sep
   menu_item "q)" "Quit"
 
@@ -22,6 +23,7 @@ while true; do
     2) purple update ;;
     3) purple status ;;
     4) purple reload ;;
+    5) purple k8s-apply ;;
     q) exit 0 ;;
   esac
 done
