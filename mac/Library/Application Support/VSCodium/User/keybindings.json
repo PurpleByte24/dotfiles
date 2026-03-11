@@ -199,4 +199,8 @@
       "key": "shift+cmd+c",
       "command": "workbench.view.extension.claude-dev-ActivityBar"
     },
+    {
+      "key": "shift+cmd+d",
+      "command": "workbench.view.extension.postgres-explorer"
+    },
 ]

@@ -18,6 +18,7 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
+  fzf-tab
 )
 
 source "$ZSH/oh-my-zsh.sh"
@@ -71,3 +72,7 @@ export NVM_DIR="$HOME/.nvm"
 # iTerm2 shell integration
 [ -e "$HOME/.iterm2_shell_integration.zsh" ] && source "$HOME/.iterm2_shell_integration.zsh"
 
+
+
+
+export KUBECONFIG=~/.kube/config

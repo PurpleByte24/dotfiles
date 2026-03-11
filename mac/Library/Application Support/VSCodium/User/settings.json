@@ -62,6 +62,10 @@
   "editor.stickyScroll.enabled": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
+  "[python]": {
+    "editor.tabSize": 4
+  },
+
   "[javascript]": {
     "editor.tabSize": 2
   },
@@ -86,7 +90,7 @@
   "python.languageServer": "Jedi",
 
   // Terminal
-  "terminal.external.osxExec": "Iterm.app",
+  "terminal.external.osxExec": "Warp.app",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyleInactive": "underline",
 
@@ -102,4 +106,5 @@
   "workbench.editorAssociations": {
       "*.lockb": "default"
   },
+  "terminal.explorerKind": "external",
 }
