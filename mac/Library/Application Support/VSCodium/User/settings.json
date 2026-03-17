@@ -11,10 +11,18 @@
   "latex-workshop.latex.autoBuild.run": "onSave",
 
   // Recipe: Compile with XeLaTeX + Biber + 2x XeLaTeX
+  //"latex-workshop.latex.recipes": [
+  //  {
+  //    "name": "XeLaTeX + Biber",
+  //    "tools": ["xelatex", "biber", "xelatex", "xelatex", "clean_up"]
+  //  }
+  //],
+
+  // Recipe: Compile with XeLaTeX + Biber + 2x XeLaTeX
   "latex-workshop.latex.recipes": [
     {
-      "name": "XeLaTeX + Biber",
-      "tools": ["xelatex", "biber", "xelatex", "xelatex", "clean_up"]
+      "name": "XeLaTeX",
+      "tools": ["xelatex", "clean_up"]
     }
   ],
 
