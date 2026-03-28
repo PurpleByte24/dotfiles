@@ -91,6 +91,12 @@ require("lazy").setup({
       "saadparwaiz1/cmp_luasnip",
     },
   },
+  -- auto pairs
+  { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
+
+  -- git
+  { "lewis6991/gitsigns.nvim" },
+  { "tpope/vim-fugitive" },
 })
 
 -- indent-blankline
