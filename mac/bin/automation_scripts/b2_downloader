@@ -1,52 +1,52 @@
-#!/bin/bash
-
+#!/bin/zsh
 # --- Configuration ---
 ENDPOINT="s3.eu-central-003.backblazeb2.com"
 BUCKET="grades-backup-bucket"
 WORK_DIR="$HOME/mongo_backups_workspace"
-
 # --- Credentials ---
 export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/b2_creds"
-
 # 1. Setup Workspace
 mkdir -p "$WORK_DIR"
-
+rm -rf "$WORK_DIR"/*
 # 2. Tool Check
 for tool in aws docker; do
     if ! command -v "$tool" &> /dev/null; then echo "❌ Missing $tool"; exit 1; fi
 done
 
 echo "🚀 Fetching backups..."
-aws s3 ls "s3://$BUCKET" --endpoint-url "https://$ENDPOINT"
+FILES=(${(f)"$(aws s3 ls "s3://$BUCKET" --endpoint-url "https://$ENDPOINT" | awk '{print $4}' | grep -v '^$')"})
 
-echo -n "👉 Enter filename: "
-read -r FILENAME
-[ -z "$FILENAME" ] && exit 1
+if [ ${#FILES[@]} -eq 0 ]; then echo "❌ No backups found."; exit 1; fi
+
+for i in {1..${#FILES[@]}}; do
+    echo "  [$i] ${FILES[$i]}"
+done
+echo -n "👉 Select number: "
+read -r SELECTION
+
+if ! [[ "$SELECTION" =~ ^[0-9]+$ ]] || [ "$SELECTION" -lt 1 ] || [ "$SELECTION" -gt "${#FILES[@]}" ]; then
+    echo "❌ Invalid selection."; exit 1
+fi
+
+FILENAME="${FILES[$SELECTION]}"
+echo "📥 Downloading: $FILENAME to $WORK_DIR..."
 
 TARGET_FOLDER="${FILENAME%.gz}"
 FULL_PATH="$WORK_DIR/$FILENAME"
 EXTRACT_PATH="$WORK_DIR/$TARGET_FOLDER"
 
-echo "📥 Downloading to $WORK_DIR..."
 aws s3 cp "s3://$BUCKET/$FILENAME" "$FULL_PATH" --endpoint-url "https://$ENDPOINT"
 
 echo "📦 Processing inside $WORK_DIR..."
 rm -rf "$EXTRACT_PATH" && mkdir -p "$EXTRACT_PATH"
 
-# We map the Workarea folder to /data
-# Docker will now drop its 'db' and 'configdb' folders inside B2_Workarea
 docker run --rm -v "$WORK_DIR:/data" mongo:6.0 bash -c "
     set -e
-    # Using /data as dbpath keeps all 'mess' inside your Workarea folder
     mongod --dbpath=/data --noauth --bind_ip_all --quiet > /dev/null 2>&1 &
     MONGOD_PID=\$!
-    
     until mongosh --quiet --eval 'db.runCommand({ping:1})' > /dev/null 2>&1; do sleep 1; done
-
     mongorestore --quiet --archive=\"/data/$FILENAME\" --gzip > /dev/null 2>&1
-    
     DBS=\$(mongosh --quiet --eval 'db.getMongo().getDBNames().filter(n => ![\"admin\",\"config\",\"local\"].includes(n)).join(\",\")')
-    
     IFS=','
     for DB in \$DBS; do
         COLLECTIONS=\$(mongosh --quiet --eval \"db.getSiblingDB('\$DB').getCollectionNames().join(',')\")
@@ -54,12 +54,11 @@ docker run --rm -v "$WORK_DIR:/data" mongo:6.0 bash -c "
             mongoexport --quiet --db=\"\$DB\" --collection=\"\$COLL\" --out=\"/data/$TARGET_FOLDER/\$COLL.json\" --jsonArray > /dev/null 2>&1
         done
     done
-
     kill \$MONGOD_PID > /dev/null 2>&1
 "
 
 if [ -d "$EXTRACT_PATH" ] && [ "$(ls -A "$EXTRACT_PATH")" ]; then
-    echo "✅ Success! JSON files are in: Desktop/B2_Workarea/$TARGET_FOLDER"
+    echo "✅ Success! JSON files are in: $EXTRACT_PATH"
     rm -f "$FULL_PATH"
     open "$EXTRACT_PATH"
 else
