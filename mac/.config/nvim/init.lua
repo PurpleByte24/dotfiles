@@ -97,10 +97,40 @@ require("lazy").setup({
   -- git
   { "lewis6991/gitsigns.nvim" },
   { "tpope/vim-fugitive" },
+
+  -- start screen
+  { "goolord/alpha-nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 })
 
 -- indent-blankline
 require("ibl").setup()
+
+-- gitsigns
+require("gitsigns").setup()
+
+-- dashboard
+local alpha = require("alpha")
+local dashboard = require("alpha.themes.dashboard")
+
+dashboard.section.header.val = {
+  "                                                     ",
+  "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
+  "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
+  "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
+  "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+  "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
+  "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+  "                                                     ",
+}
+
+dashboard.section.buttons.val = {
+  dashboard.button("f", "  Find file",    "<cmd>Telescope find_files<CR>"),
+  dashboard.button("r", "  Recent files", "<cmd>Telescope oldfiles<CR>"),
+  dashboard.button("g", "  Live grep",    "<cmd>Telescope live_grep<CR>"),
+  dashboard.button("q", "  Quit",         "<cmd>qa<CR>"),
+}
+
+alpha.setup(dashboard.opts)
 
 -- nvim-cmp
 local cmp = require("cmp")
