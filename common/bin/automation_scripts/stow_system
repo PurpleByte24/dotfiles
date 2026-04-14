@@ -1,0 +1,68 @@
+#!/bin/bash
+
+print() {
+  local strType="$1"
+  local str="$2"
+  local prefix
+
+  case "$strType" in
+    task)    prefix="TASK   " ;;
+    info)    prefix="INFO   " ;;
+    success) prefix="SUCCESS" ;;
+    error)   prefix="ERROR  " ;;
+    *)       prefix="UNKNOWN" ;;
+  esac
+
+  echo "$prefix -> $str"
+}
+
+# Find dotfiles repo path
+print "task" "Starting search for dotfiles repo..."
+
+cd "$HOME"
+
+if [ -d "$HOME/dotfiles" ]; then
+  DOTFILES_DIR="$HOME/dotfiles"
+elif [ -d "$HOME/repos" ]; then
+  DOTFILES_DIR=$(find "$HOME/repos" -type d -name "dotfiles" -print -quit)
+  [ -z "$DOTFILES_DIR" ] && {
+    print "error" "Cannot find dotfiles repo. Aborting..."
+    exit 1
+  }
+else
+  print "error" "Cannot find dotfiles repo. Aborting..."
+  exit 1
+fi
+
+print "info" "Found dotfiles dir at $DOTFILES_DIR"
+
+# Restow
+OS=$(uname -s)
+
+print "task" "Restowing common..."
+
+# Always stow common
+stow -R --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' common
+
+print "success" "Restowed common"
+
+# Stow OS-specific
+case "$OS" in
+  Darwin)
+    print "info" "OS detected (Darwin)"
+    print "task" "Restowing mac..."
+    stow -R --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' mac
+    print "success" "Restowed mac"
+    ;;
+  Linux)
+    print "info" "OS detected (Linux)"
+    print "task" "Restowing omarchy..."
+    stow -R --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' omarchy
+    print "success" "Restowed omarchy"
+    ;;
+  *)
+    print "error" "Unknown OS: $OS"
+    exit 1
+    ;;
+esac
+

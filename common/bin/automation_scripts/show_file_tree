@@ -2,4 +2,3 @@
 
 tree -avC -I .git --gitignore --dirsfirst
 
-# Alias: THIS_TREE
