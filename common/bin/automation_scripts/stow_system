@@ -4,65 +4,72 @@ print() {
   local strType="$1"
   local str="$2"
   local prefix
-
   case "$strType" in
-    task)    prefix="TASK   " ;;
-    info)    prefix="INFO   " ;;
-    success) prefix="SUCCESS" ;;
-    error)   prefix="ERROR  " ;;
-    *)       prefix="UNKNOWN" ;;
+  task) prefix="TASK   " ;;
+  info) prefix="INFO   " ;;
+  success) prefix="SUCCESS" ;;
+  error) prefix="ERROR  " ;;
+  *) prefix="UNKNOWN" ;;
   esac
-
   echo "$prefix -> $str"
 }
 
-# Find dotfiles repo path
-print "task" "Starting search for dotfiles repo..."
-
-cd "$HOME"
-
-if [ -d "$HOME/dotfiles" ]; then
-  DOTFILES_DIR="$HOME/dotfiles"
-elif [ -d "$HOME/repos" ]; then
-  DOTFILES_DIR=$(find "$HOME/repos" -type d -name "dotfiles" -print -quit)
-  [ -z "$DOTFILES_DIR" ] && {
-    print "error" "Cannot find dotfiles repo. Aborting..."
-    exit 1
-  }
-else
-  print "error" "Cannot find dotfiles repo. Aborting..."
+# Dependency check
+if ! command -v stow &>/dev/null; then
+  print "error" "GNU Stow is not installed. Aborting..."
   exit 1
 fi
 
-print "info" "Found dotfiles dir at $DOTFILES_DIR"
+# Detect dotfiles repo path via symlink resolution
+# (Strategy A: Only works if this script was stowed)
+REAL_PATH=$(readlink -f "$0" 2>/dev/null || realpath "$0" 2>/dev/null)
 
-# Restow
+if [[ "$REAL_PATH" == "$0" ]]; then
+  print "error" "Script is not a symlink. Please stow your dotfiles first. Aborting..."
+  exit 1
+fi
+
+# Resolve the root of the dotfiles repo
+# Removes the trailing path: /common/bin/automation_scripts/stow_system
+DOTFILES_DIR=$(echo "$REAL_PATH" | sed 's|/common/bin/.*||')
+
+if [ ! -d "$DOTFILES_DIR" ]; then
+  print "error" "Resolved path $DOTFILES_DIR is not a directory. Aborting..."
+  exit 1
+fi
+
+print "info" "Found dotfiles repo at: $DOTFILES_DIR"
+
+# Restow Logic
 OS=$(uname -s)
 
-print "task" "Restowing common..."
-
-# Always stow common
-stow -R --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' common
-
-print "success" "Restowed common"
-
-# Stow OS-specific
-case "$OS" in
-  Darwin)
-    print "info" "OS detected (Darwin)"
-    print "task" "Restowing mac..."
-    stow -R --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' mac
-    print "success" "Restowed mac"
-    ;;
-  Linux)
-    print "info" "OS detected (Linux)"
-    print "task" "Restowing omarchy..."
-    stow -R --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' omarchy
-    print "success" "Restowed omarchy"
-    ;;
-  *)
-    print "error" "Unknown OS: $OS"
+do_restow() {
+  local pkg="$1"
+  print "task" "Restowing $pkg..."
+  if stow -R --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' "$pkg"; then
+    print "success" "Restowed $pkg"
+  else
+    print "error" "Failed to restow $pkg"
     exit 1
-    ;;
+  fi
+}
+
+# Execute
+do_restow "common"
+
+case "$OS" in
+Darwin)
+  print "info" "OS detected: macOS"
+  do_restow "mac"
+  ;;
+Linux)
+  print "info" "OS detected: Linux"
+  do_restow "omarchy"
+  ;;
+*)
+  print "error" "Unknown OS: $OS"
+  exit 1
+  ;;
 esac
 
+print "success" "System restow complete!"
