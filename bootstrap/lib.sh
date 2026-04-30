@@ -31,7 +31,7 @@ get_dotfiles_dir() {
 get_os_package() {
   case "$(uname -s)" in
   Darwin) echo "mac" ;;
-  Linux) echo "omarchy" ;;
+  Linux) echo "omarchy-mac" ;;
   *) echo "unknown" ;;
   esac
 }
