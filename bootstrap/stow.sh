@@ -1,25 +1,28 @@
 #!/bin/bash
 
-OS=$(uname -s)
-DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+source "$(dirname "$0")/lib.sh"
 
-# Always stow common
-stow -v --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' common
+check_deps
+validate_env
 
-# Stow OS-specific
-case "$OS" in
-  Darwin)
-    stow -v --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' mac
-    ;;
-  Linux)
-    stow --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' omarchy
-    ;;
-  *)
-    echo "Unknown OS: $OS"
-    exit 1
-    ;;
-esac
+DOTFILES_DIR=$(get_dotfiles_dir)
+OS_PKG=$(get_os_package)
 
-echo "✅ Stowed successfully"
+if [[ "$OS_PKG" == "unknown" ]]; then
+  echo "❌ Unknown OS. Aborting..."
+  exit 1
+fi
 
-echo "Run alias 'restow' to restore you system (dont forget to restart shell!!)"
+echo "🔗 Stowing packages..."
+
+# Stow common and OS-specific with --adopt
+stow -v --adopt --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' common
+stow -v --adopt --dir="$DOTFILES_DIR" --target="$HOME" --ignore='.DS_Store' "$OS_PKG"
+
+echo "✅ Symlinks created"
+
+# Restore repo state
+git checkout .
+echo "✅ File contents restored to remote status"
+
+echo "Run alias 'restow' to restore your system (dont forget to restart shell!!)"
