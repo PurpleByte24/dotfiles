@@ -2,6 +2,9 @@
 
 s_path="$HOME/bin/automation_scripts"
 
+alias python=python3
+alias pip=pip3
+
 alias CLEAN_TEX="$s_path/cleanup_tex_aux_files"
 alias CF="$s_path/initialize_CF"
 alias RFF="$s_path/run_fastfetch"
