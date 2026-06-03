@@ -1,0 +1,101 @@
+config-version = 2
+
+after-startup-command = []
+start-at-login = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 30
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'horizontal'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+automatically-unhide-macos-hidden-apps = false
+
+[gaps]
+    inner.horizontal = 8
+    inner.vertical   = 8
+    outer.left       = 0
+    outer.bottom     = 0
+    outer.top        = 0
+    outer.right      = 0
+
+[key-mapping]
+    preset = 'qwerty'
+
+[mode.main.binding]
+    # Focus
+    alt-ctrl-h = 'focus left'
+    alt-ctrl-j = 'focus down'
+    alt-ctrl-k = 'focus up'
+    alt-ctrl-l = 'focus right'
+
+    # Move/swap windows within layout
+    alt-ctrl-shift-h = 'move left'
+    alt-ctrl-shift-j = 'move down'
+    alt-ctrl-shift-k = 'move up'
+    alt-ctrl-shift-l = 'move right'
+
+    # Switch workspace
+    alt-ctrl-1 = 'workspace 1'
+    alt-ctrl-2 = 'workspace 2'
+    alt-ctrl-3 = 'workspace 3'
+    alt-ctrl-4 = 'workspace 4'
+    alt-ctrl-5 = 'workspace 5'
+    alt-ctrl-6 = 'workspace 6'
+    alt-ctrl-7 = 'workspace 7'
+    alt-ctrl-8 = 'workspace 8'
+    alt-ctrl-9 = 'workspace 9'
+
+    # Send window to workspace
+    alt-ctrl-shift-1 = 'move-node-to-workspace 1'
+    alt-ctrl-shift-2 = 'move-node-to-workspace 2'
+    alt-ctrl-shift-3 = 'move-node-to-workspace 3'
+    alt-ctrl-shift-4 = 'move-node-to-workspace 4'
+    alt-ctrl-shift-5 = 'move-node-to-workspace 5'
+    alt-ctrl-shift-6 = 'move-node-to-workspace 6'
+    alt-ctrl-shift-7 = 'move-node-to-workspace 7'
+    alt-ctrl-shift-8 = 'move-node-to-workspace 8'
+    alt-ctrl-shift-9 = 'move-node-to-workspace 9'
+
+    # Previous / next workspace (wraps around)
+    alt-ctrl-left  = '''exec-and-forget
+        current=$(aerospace list-workspaces --focused)
+        prev=$((current - 1))
+        if [ "$prev" -lt 1 ]; then
+            prev=$(aerospace list-workspaces --all | tail -1)
+        fi
+        aerospace workspace "$prev"
+    '''
+    alt-ctrl-right = '''exec-and-forget
+        current=$(aerospace list-workspaces --focused)
+        next=$((current + 1))
+        if [ "$next" -gt 9 ]; then
+            next=1
+        fi
+        aerospace workspace "$next"
+    '''
+
+    # Float / tile toggle for focused window
+    alt-ctrl-f = 'layout floating tiling'
+
+    # Service mode (reset/debug)
+    alt-ctrl-semicolon = 'mode service'
+
+[mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r   = ['flatten-workspace-tree', 'mode main']
+    f   = ['layout floating tiling', 'mode main']
+    backspace = ['close-all-windows-but-current', 'mode main']
+
+    alt-ctrl-shift-h = ['join-with left',  'mode main']
+    alt-ctrl-shift-j = ['join-with down',  'mode main']
+    alt-ctrl-shift-k = ['join-with up',    'mode main']
+    alt-ctrl-shift-l = ['join-with right', 'mode main']
+
+# All windows float by default
+[[on-window-detected]]
+    check-further-callbacks = true
+    run = 'layout floating'
