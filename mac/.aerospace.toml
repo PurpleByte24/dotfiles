@@ -1,6 +1,8 @@
 config-version = 2
 
-after-startup-command = []
+after-startup-command = [
+    'exec-and-forget borders active_color=0xff7aa2f7 inactive_color=0xff31353d width=4.0 style=round'
+]
 start-at-login = true
 
 enable-normalization-flatten-containers = true
@@ -16,11 +18,11 @@ automatically-unhide-macos-hidden-apps = false
 
 [gaps]
     inner.horizontal = 8
-    inner.vertical   = 8
-    outer.left       = 0
-    outer.bottom     = 0
-    outer.top        = 0
-    outer.right      = 0
+    inner.vertical   = 0
+    outer.left       = 4
+    outer.bottom     = 4
+    outer.top        = 4
+    outer.right      = 4
 
 [key-mapping]
     preset = 'qwerty'
@@ -28,14 +30,10 @@ automatically-unhide-macos-hidden-apps = false
 [mode.main.binding]
     # Focus
     alt-ctrl-h = 'focus left'
-    alt-ctrl-j = 'focus down'
-    alt-ctrl-k = 'focus up'
     alt-ctrl-l = 'focus right'
 
     # Move/swap windows within layout
     alt-ctrl-shift-h = 'move left'
-    alt-ctrl-shift-j = 'move down'
-    alt-ctrl-shift-k = 'move up'
     alt-ctrl-shift-l = 'move right'
 
     # Switch workspace
@@ -49,51 +47,79 @@ automatically-unhide-macos-hidden-apps = false
     alt-ctrl-8 = 'workspace 8'
     alt-ctrl-9 = 'workspace 9'
 
-    # Send window to workspace
-    alt-ctrl-shift-1 = 'move-node-to-workspace 1'
-    alt-ctrl-shift-2 = 'move-node-to-workspace 2'
-    alt-ctrl-shift-3 = 'move-node-to-workspace 3'
-    alt-ctrl-shift-4 = 'move-node-to-workspace 4'
-    alt-ctrl-shift-5 = 'move-node-to-workspace 5'
-    alt-ctrl-shift-6 = 'move-node-to-workspace 6'
-    alt-ctrl-shift-7 = 'move-node-to-workspace 7'
-    alt-ctrl-shift-8 = 'move-node-to-workspace 8'
-    alt-ctrl-shift-9 = 'move-node-to-workspace 9'
+    # Smart Move window to workspace (Prevents gaps)
+    alt-ctrl-shift-1 = '''exec-and-forget
+        target=1; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-2 = '''exec-and-forget
+        target=2; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-3 = '''exec-and-forget
+        target=3; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-4 = '''exec-and-forget
+        target=4; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-5 = '''exec-and-forget
+        target=5; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-6 = '''exec-and-forget
+        target=6; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-7 = '''exec-and-forget
+        target=7; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-8 = '''exec-and-forget
+        target=8; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
+    alt-ctrl-shift-9 = '''exec-and-forget
+        target=9; max_active=$(aerospace list-workspaces --all | grep -E '^[0-9]+$' | sort -n | tail -n 1); : ${max_active:=1}; next_allowed=$(( max_active + 1 ))
+        if [ "$target" -gt "$next_allowed" ]; then target=$next_allowed; fi; aerospace move-node-to-workspace "$target"
+    '''
 
-    # Previous / next workspace (wraps around)
+    # Dynamic cycling through active workspaces only
     alt-ctrl-left  = '''exec-and-forget
-        current=$(aerospace list-workspaces --focused)
-        prev=$((current - 1))
-        if [ "$prev" -lt 1 ]; then
-            prev=$(aerospace list-workspaces --all | tail -1)
-        fi
-        aerospace workspace "$prev"
+        workspaces=($(aerospace list-workspaces --all))
+        focused=$(aerospace list-workspaces --focused)
+        for i in "${!workspaces[@]}"; do
+            if [[ "${workspaces[$i]}" == "$focused" ]]; then
+                prev_idx=$(( (i - 1 + ${#workspaces[@]}) % ${#workspaces[@]} ))
+                aerospace workspace "${workspaces[$prev_idx]}"
+                break
+            fi
+        done
     '''
     alt-ctrl-right = '''exec-and-forget
-        current=$(aerospace list-workspaces --focused)
-        next=$((current + 1))
-        if [ "$next" -gt 9 ]; then
-            next=1
-        fi
-        aerospace workspace "$next"
+        workspaces=($(aerospace list-workspaces --all))
+        focused=$(aerospace list-workspaces --focused)
+        for i in "${!workspaces[@]}"; do
+            if [[ "${workspaces[$i]}" == "$focused" ]]; then
+                next_idx=$(( (i + 1) % ${#workspaces[@]} ))
+                aerospace workspace "${workspaces[$next_idx]}"
+                break
+            fi
+        done
     '''
 
     # Float / tile toggle for focused window
     alt-ctrl-f = 'layout floating tiling'
 
     # Service mode (reset/debug)
-    alt-ctrl-semicolon = 'mode service'
+    alt-ctrl-space = 'mode service'
 
 [mode.service.binding]
-    esc = ['reload-config', 'mode main']
-    r   = ['flatten-workspace-tree', 'mode main']
+    esc = 'mode main'
+    r = ['reload-config', 'mode main']
     f   = ['layout floating tiling', 'mode main']
     backspace = ['close-all-windows-but-current', 'mode main']
-
-    alt-ctrl-shift-h = ['join-with left',  'mode main']
-    alt-ctrl-shift-j = ['join-with down',  'mode main']
-    alt-ctrl-shift-k = ['join-with up',    'mode main']
-    alt-ctrl-shift-l = ['join-with right', 'mode main']
 
 # All windows float by default
 [[on-window-detected]]
