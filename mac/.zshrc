@@ -72,7 +72,19 @@ export NVM_DIR="$HOME/.nvm"
 # iTerm2 shell integration
 [ -e "$HOME/.iterm2_shell_integration.zsh" ] && source "$HOME/.iterm2_shell_integration.zsh"
 
-
-
-
 export KUBECONFIG=~/.kube/config
+
+# Created by `pipx` on 2026-05-20 21:38:03
+export PATH="$PATH:/Users/neliogautschi/.local/bin"
+
+# pnpm
+export PNPM_HOME="/Users/neliogautschi/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
