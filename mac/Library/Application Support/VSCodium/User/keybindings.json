@@ -203,4 +203,9 @@
       "key": "shift+cmd+d",
       "command": "workbench.view.extension.postgres-explorer"
     },
+    {
+      "key": "shift+cmd+a",
+      "command": "workbench.view.extension.geminiChat",
+      "when": "viewContainer.workbench.view.extension.geminiChat.enabled && !runningOnCloudShell"
+    }
 ]

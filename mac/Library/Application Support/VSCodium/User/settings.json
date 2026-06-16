@@ -11,20 +11,20 @@
   "latex-workshop.latex.autoBuild.run": "onSave",
 
   // Recipe: Compile with XeLaTeX + Biber + 2x XeLaTeX
-  //"latex-workshop.latex.recipes": [
-  //  {
-  //    "name": "XeLaTeX + Biber",
-  //    "tools": ["xelatex", "biber", "xelatex", "xelatex", "clean_up"]
-  //  }
-  //],
-
-  // Recipe: Compile with XeLaTeX + Biber + 2x XeLaTeX
   "latex-workshop.latex.recipes": [
     {
-      "name": "XeLaTeX",
-      "tools": ["xelatex", "clean_up"]
+      "name": "XeLaTeX + Biber",
+      "tools": ["xelatex", "biber", "xelatex", "xelatex", "clean_up"]
     }
   ],
+
+  // Recipe: Compile with XeLaTeX + Biber + 2x XeLaTeX
+  //"latex-workshop.latex.recipes": [
+  //  {
+  //    "name": "XeLaTeX",
+  //    "tools": ["xelatex", "clean_up"]
+  //  }
+  //],
 
   // Compilation tools
   "latex-workshop.latex.tools": [
@@ -70,10 +70,6 @@
   "editor.stickyScroll.enabled": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-  "[python]": {
-    "editor.tabSize": 4
-  },
-
   "[javascript]": {
     "editor.tabSize": 2
   },
@@ -94,11 +90,22 @@
   "editor.insertSpaces": true,
   "editor.detectIndentation": false,
 
-  // Python linting settings
-  "python.languageServer": "Jedi",
+  "pylint.enabled": false,
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    }
+  },
+  "ruff.enable": true,
+  "ruff.lint.enable": true,
+  "ruff.configurationPreference": "filesystemFirst",
+  "ruff.configuration": "/Users/neliogautschi/.config/ruff/ruff.toml",
 
   // Terminal
-  "terminal.external.osxExec": "Warp.app",
+  "terminal.external.osxExec": "Iterm.app",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyleInactive": "underline",
 
@@ -115,4 +122,7 @@
       "*.lockb": "default"
   },
   "terminal.explorerKind": "external",
+  "github-actions.workflows.pinned.workflows": [],
+  "http.systemCertificatesNode": true,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
 }
