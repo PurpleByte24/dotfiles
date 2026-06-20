@@ -152,13 +152,14 @@
     "which_key": {
         "enabled": false,
     },
-    "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+    "buffer_font_family": "JetBrainsMonoNL Nerd Font Mono",
     "icon_theme": {
         "mode": "system",
         "light": "Material Icon Theme",
         "dark": "Material Icon Theme"
     },
     "terminal": {
+        "font_family": "JetBrainsMonoNL Nerd Font Mono",
         "button": false,
         "show_count_badge": true,
         "blinking": "on",

@@ -366,12 +366,7 @@
     },
     {
         "bindings": {
-            "cmd-+": [
-                "zed::IncreaseBufferFontSize",
-                {
-                    "persist": false,
-                },
-            ],
+            "cmd-+": ["action::Sequence", ["zed::IncreaseBufferFontSize", "zed::IncreaseUiFontSize"]],
         },
     },
     {
@@ -386,12 +381,7 @@
     },
     {
         "bindings": {
-            "cmd-=": [
-                "zed::ResetBufferFontSize",
-                {
-                    "persist": false,
-                },
-            ],
+            "cmd-=": ["action::Sequence", ["zed::ResetBufferFontSize", "zed::ResetUiFontSize"]],
         },
     },
     {
@@ -566,15 +556,27 @@
         },
     },
     {
+        "context": "Pane",
+        "bindings": {
+            "cmd-§": "pane::TogglePinTab",
+        },
+    },
+    {
+        "context": "Pane",
+        "unbind": {
+            "cmd-k shift-enter": "pane::TogglePinTab",
+        },
+    },
+    {
         "context": "ProjectPanel",
         "unbind": {
             "backspace": [
                 "project_panel::Trash",
                 {
-                    "skip_prompt": false
-                }
-            ]
-        }
+                    "skip_prompt": false,
+                },
+            ],
+        },
     },
     {
         "context": "ProjectPanel",
@@ -582,21 +584,10 @@
             "delete": [
                 "project_panel::Trash",
                 {
-                    "skip_prompt": false
-                }
-            ]
-        }
-    },
-    {
-        "context": "ProjectPanel",
-        "bindings": {
-            "cmd-backspace": [
-                "project_panel::Trash",
-                {
-                    "skip_prompt": false
-                }
-            ]
-        }
+                    "skip_prompt": false,
+                },
+            ],
+        },
     },
     {
         "context": "ProjectPanel",
@@ -604,27 +595,75 @@
             "cmd-backspace": [
                 "project_panel::Trash",
                 {
-                    "skip_prompt": true
-                }
-            ]
-        }
+                    "skip_prompt": true,
+                },
+            ],
+        },
     },
     {
-        "context": "ProjectPanel && not_editing",
-        "unbind": {
-            "space": "project_panel::Open"
-        }
-    },
-    {
-        "context": "Pane",
+        "context": "ProjectPanel",
         "bindings": {
-            "cmd-§": "pane::TogglePinTab"
-        }
+            "cmd-backspace": [
+                "project_panel::Trash",
+                {
+                    "skip_prompt": false,
+                },
+            ],
+        },
     },
     {
-        "context": "Pane",
+        "context": "Editor",
+        "bindings": {
+            "cmd-r": "editor::ReloadFile",
+        },
+    },
+    {
+        "context": "Workspace",
         "unbind": {
-            "cmd-k shift-enter": "pane::TogglePinTab"
-        }
-    }
+            "ctrl-r": "projects::OpenRecent",
+        },
+    },
+    {
+        "context": "Welcome",
+        "bindings": {
+            "cmd-shift-r": "projects::OpenRecent",
+        },
+    },
+    {
+        "context": "Welcome",
+        "unbind": {
+            "cmd--": [
+                "zed::DecreaseUiFontSize",
+                {
+                    "persist": false,
+                },
+            ],
+        },
+    },
+    {
+        "context": "Onboarding",
+        "unbind": {
+            "cmd--": [
+                "zed::DecreaseUiFontSize",
+                {
+                    "persist": false,
+                },
+            ],
+        },
+    },
+    {
+        "unbind": {
+            "cmd--": [
+                "zed::DecreaseBufferFontSize",
+                {
+                    "persist": false,
+                },
+            ],
+        },
+    },
+    {
+        "bindings": {
+            "cmd--": ["action::Sequence", ["zed::DecreaseBufferFontSize", "zed::DecreaseUiFontSize"]],
+        },
+    },
 ]
