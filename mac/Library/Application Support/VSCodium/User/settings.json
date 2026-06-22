@@ -125,4 +125,5 @@
   "github-actions.workflows.pinned.workflows": [],
   "http.systemCertificatesNode": true,
   "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.allowVariableFonts": false,
 }

@@ -207,5 +207,20 @@
       "key": "shift+cmd+a",
       "command": "workbench.view.extension.geminiChat",
       "when": "viewContainer.workbench.view.extension.geminiChat.enabled && !runningOnCloudShell"
+    },
+    {
+      "key": "cmd+[Period]",
+      "command": "editor.action.revealDefinition",
+      "when": "editorHasDefinitionProvider && editorTextFocus"
+    },
+    {
+      "key": "f12",
+      "command": "-editor.action.revealDefinition",
+      "when": "editorHasDefinitionProvider && editorTextFocus"
+    },
+    {
+      "key": "shift+cmd+d",
+      "command": "-workbench.view.debug",
+      "when": "viewContainer.workbench.view.debug.enabled"
     }
 ]
