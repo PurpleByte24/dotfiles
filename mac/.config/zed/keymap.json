@@ -6,664 +6,744 @@
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
 [
-    {
-        "context": "Workspace",
-        "bindings": {
-            // "shift shift": "file_finder::Toggle"
-        },
-    },
-    {
-        "context": "Editor && vim_mode == insert",
-        "bindings": {
-            // "j k": "vim::NormalBefore"
-        },
-    },
-    {
-        "context": "GitPanel && ChangesList && !GitBranchSelector",
-        "unbind": {
-            "cmd-y": "git::StageFile",
-        },
-    },
-    {
-        "context": "Editor && !agent_diff && !AgentPanel",
-        "unbind": {
-            "cmd-y": "git::StageAndNext",
-        },
-    },
-    {
-        "context": "Editor && editor_agent_diff",
-        "unbind": {
-            "cmd-y": "agent::Keep",
-        },
-    },
-    {
-        "context": "AgentDiff",
-        "unbind": {
-            "cmd-y": "agent::Keep",
-        },
-    },
-    {
-        "context": "AcpThread",
-        "unbind": {
-            "cmd-y": "agent::AllowOnce",
-        },
-    },
-    {
-        "context": "Workspace",
-        "bindings": {
-            "cmd-y": "workspace::ToggleLeftDock",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-b": "workspace::ToggleLeftDock",
-        },
-    },
-    {
-        "context": "Workspace",
-        "bindings": {
-            "cmd-b": "workspace::ToggleRightDock",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-r": "workspace::ToggleRightDock",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-t": "project_symbols::Toggle",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-<": "terminal_panel::Toggle",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-shift-t": "pane::ReopenClosedItem",
-        },
-    },
-    {
-        "context": "Terminal",
-        "bindings": {
-            "cmd-shift-t": "terminal_panel::ToggleFocus",
-        },
-    },
-    {
-        "context": "!BufferSearchBar",
-        "bindings": {
-            "cmd-g": "git_graph::Open",
-        },
-    },
-    {
-        "context": "BufferSearchBar",
-        "bindings": {
-            "cmd-g": "search::SelectNextMatch",
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "cmd-g": "search::SelectNextMatch",
-        },
-    },
-    {
-        "context": "GitPanel && ChangesList && !GitBranchSelector",
-        "unbind": {
-            "escape": "git_panel::ToggleFocus",
-        },
-    },
-    {
-        "context": "BufferSearchBar",
-        "bindings": {
-            "cmd-shift-g": "search::SelectPreviousMatch",
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "cmd-shift-g": "search::SelectPreviousMatch",
-        },
-    },
-    {
-        "context": "!BufferSearchBar",
-        "bindings": {
-            "cmd-shift-g": "git_panel::ToggleFocus",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-shift-g": "git_panel::ToggleFocus",
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "alt-cmd-right": "pane::ActivateNextItem",
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "alt-cmd-left": "pane::ActivatePreviousItem",
-        },
-    },
-    {
-        "context": "RunModal",
-        "unbind": {
-            "ctrl-shift-tab": "pane::ActivatePreviousItem",
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-1": ["pane::ActivateItem", 0],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-3": ["pane::ActivateItem", 2],
-        },
-    },
-    {
-        "context": "KeymapEditor",
-        "bindings": {
-            "cmd-backspace": "keymap_editor::DeleteBinding",
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-9": ["pane::ActivateItem", 8],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-8": ["pane::ActivateItem", 7],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-6": ["pane::ActivateItem", 5],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-7": ["pane::ActivateItem", 6],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-5": ["pane::ActivateItem", 4],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-4": ["pane::ActivateItem", 3],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-2": ["pane::ActivateItem", 1],
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "ctrl-0": "pane::ActivateLastItem",
-        },
-    },
-    {
-        "context": "RunModal",
-        "unbind": {
-            "ctrl-tab": "pane::ActivateNextItem",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-9": ["workspace::ActivatePane", 8],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-8": ["workspace::ActivatePane", 7],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-7": ["workspace::ActivatePane", 6],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-6": ["workspace::ActivatePane", 5],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-5": ["workspace::ActivatePane", 4],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-4": ["workspace::ActivatePane", 3],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-3": ["workspace::ActivatePane", 2],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-2": ["workspace::ActivatePane", 1],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-1": ["workspace::ActivatePane", 0],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-1": ["pane::ActivateItem", 0],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-2": ["pane::ActivateItem", 1],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-3": ["pane::ActivateItem", 2],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-4": ["pane::ActivateItem", 3],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-5": ["pane::ActivateItem", 4],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-6": ["pane::ActivateItem", 5],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-7": ["pane::ActivateItem", 6],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-8": ["pane::ActivateItem", 7],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-9": ["pane::ActivateItem", 8],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-0": "pane::ActivateLastItem",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "cmd-w": "workspace::CloseActiveDock",
-        },
-    },
-    {
-        "unbind": {
-            "cmd-¨": [
-                "zed::IncreaseBufferFontSize",
-                {
-                    "persist": false,
-                },
-            ],
-        },
-    },
-    {
-        "bindings": {
-            "cmd-+": ["action::Sequence", ["zed::IncreaseBufferFontSize", "zed::IncreaseUiFontSize"]],
-        },
-    },
-    {
-        "unbind": {
-            "cmd-!": [
-                "zed::IncreaseBufferFontSize",
-                {
-                    "persist": false,
-                },
-            ],
-        },
-    },
-    {
-        "bindings": {
-            "cmd-=": ["action::Sequence", ["zed::ResetBufferFontSize", "zed::ResetUiFontSize"]],
-        },
-    },
-    {
-        "unbind": {
-            "cmd-0": [
-                "zed::ResetBufferFontSize",
-                {
-                    "persist": false,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Workspace && !Terminal",
-        "unbind": {
-            "cmd-n": "workspace::NewFile",
-        },
-    },
-    {
-        "context": "Workspace && !Terminal && !ProjectPanel",
-        "bindings": {
-            "cmd-n": "workspace::NewFile",
-        },
-    },
-    {
-        "context": "Pane || Terminal || ProjectPanel",
-        "bindings": {
-            "cmd-w": [
-                "pane::CloseActiveItem",
-                {
-                    "close_pinned": false,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Terminal",
-        "bindings": {
-            "cmd-t": "workspace::NewTerminal",
-        },
-    },
-    {
-        "context": "!Terminal && !KeymapEditor && !DebugPanel",
-        "bindings": {
-            "cmd-t": "terminal_panel::ToggleFocus",
-        },
-    },
-    {
-        "context": "Editor",
-        "unbind": {
-            "cmd-.": "editor::ToggleCodeActions",
-        },
-    },
-    {
-        "context": "Editor",
-        "unbind": {
-            "f12": "editor::GoToDefinition",
-        },
-    },
-    {
-        "context": "Editor",
-        "bindings": {
-            "cmd-.": "editor::GoToTypeDefinition",
-        },
-    },
-    {
-        "context": "Editor",
-        "unbind": {
-            "cmd-f12": "editor::GoToTypeDefinition",
-        },
-    },
-    {
-        "context": "Editor",
-        "bindings": {
-            "cmd-i": "editor::ShowCompletions",
-        },
-    },
-    {
-        "context": "Editor",
-        "unbind": {
-            "ctrl-space": "editor::ShowCompletions",
-        },
-    },
-    {
-        "context": "Editor",
-        "unbind": {
-            "cmd-i": "editor::ShowSignatureHelp",
-        },
-    },
-    {
-        "context": "Dock > Terminal",
-        "bindings": {
-            "cmd-shift-up": [
-                "workspace::IncreaseActiveDockSize",
-                {
-                    "px": 75,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-alt-_": [
-                "workspace::DecreaseOpenDocksSize",
-                {
-                    "px": 0,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-alt-!": [
-                "workspace::IncreaseOpenDocksSize",
-                {
-                    "px": 0,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-alt-=": "workspace::ResetOpenDocksSize",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-alt-¨": [
-                "workspace::IncreaseActiveDockSize",
-                {
-                    "px": 0,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Dock > Terminal",
-        "bindings": {
-            "cmd-shift-down": [
-                "workspace::DecreaseActiveDockSize",
-                {
-                    "px": 75,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-alt--": [
-                "workspace::DecreaseActiveDockSize",
-                {
-                    "px": 0,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Terminal",
-        "unbind": {
-            "cmd-n": "workspace::NewTerminal",
-        },
-    },
-    {
-        "context": "!Terminal",
-        "bindings": {
-            "cmd-shift-t": ["action::Sequence", ["terminal_panel::ToggleFocus", "terminal_panel::Toggle"]],
-        },
-    },
-    {
-        "context": "Pane",
-        "bindings": {
-            "cmd-§": "pane::TogglePinTab",
-        },
-    },
-    {
-        "context": "Pane",
-        "unbind": {
-            "cmd-k shift-enter": "pane::TogglePinTab",
-        },
-    },
-    {
-        "context": "ProjectPanel",
-        "unbind": {
-            "backspace": [
-                "project_panel::Trash",
-                {
-                    "skip_prompt": false,
-                },
-            ],
-        },
-    },
-    {
-        "context": "ProjectPanel",
-        "unbind": {
-            "delete": [
-                "project_panel::Trash",
-                {
-                    "skip_prompt": false,
-                },
-            ],
-        },
-    },
-    {
-        "context": "ProjectPanel",
-        "unbind": {
-            "cmd-backspace": [
-                "project_panel::Trash",
-                {
-                    "skip_prompt": true,
-                },
-            ],
-        },
-    },
-    {
-        "context": "ProjectPanel",
-        "bindings": {
-            "cmd-backspace": [
-                "project_panel::Trash",
-                {
-                    "skip_prompt": false,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Editor",
-        "bindings": {
-            "cmd-r": "editor::ReloadFile",
-        },
-    },
-    {
-        "context": "Workspace",
-        "unbind": {
-            "ctrl-r": "projects::OpenRecent",
-        },
-    },
-    {
-        "context": "Welcome",
-        "bindings": {
-            "cmd-shift-r": "projects::OpenRecent",
-        },
-    },
-    {
-        "context": "Welcome",
-        "unbind": {
-            "cmd--": [
-                "zed::DecreaseUiFontSize",
-                {
-                    "persist": false,
-                },
-            ],
-        },
-    },
-    {
-        "context": "Onboarding",
-        "unbind": {
-            "cmd--": [
-                "zed::DecreaseUiFontSize",
-                {
-                    "persist": false,
-                },
-            ],
-        },
-    },
-    {
-        "unbind": {
-            "cmd--": [
-                "zed::DecreaseBufferFontSize",
-                {
-                    "persist": false,
-                },
-            ],
-        },
-    },
-    {
-        "bindings": {
-            "cmd--": ["action::Sequence", ["zed::DecreaseBufferFontSize", "zed::DecreaseUiFontSize"]],
-        },
-    },
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "context": "GitPanel && ChangesList && !GitBranchSelector",
+    "unbind": {
+      "cmd-y": "git::StageFile",
+    },
+  },
+  {
+    "context": "Editor && !agent_diff && !AgentPanel",
+    "unbind": {
+      "cmd-y": "git::StageAndNext",
+    },
+  },
+  {
+    "context": "Editor && editor_agent_diff",
+    "unbind": {
+      "cmd-y": "agent::Keep",
+    },
+  },
+  {
+    "context": "AgentDiff",
+    "unbind": {
+      "cmd-y": "agent::Keep",
+    },
+  },
+  {
+    "context": "AcpThread",
+    "unbind": {
+      "cmd-y": "agent::AllowOnce",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-y": "workspace::ToggleLeftDock",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-b": "workspace::ToggleLeftDock",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-b": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-r": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-t": "project_symbols::Toggle",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-<": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-shift-t": "pane::ReopenClosedItem",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-shift-t": "terminal_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "!BufferSearchBar",
+    "bindings": {
+      "cmd-g": "git_graph::Open",
+    },
+  },
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "cmd-g": "search::SelectNextMatch",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "cmd-g": "search::SelectNextMatch",
+    },
+  },
+  {
+    "context": "GitPanel && ChangesList && !GitBranchSelector",
+    "unbind": {
+      "escape": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "cmd-shift-g": "search::SelectPreviousMatch",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "cmd-shift-g": "search::SelectPreviousMatch",
+    },
+  },
+  {
+    "context": "!BufferSearchBar",
+    "bindings": {
+      "cmd-shift-g": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-shift-g": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "alt-cmd-right": "pane::ActivateNextItem",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "alt-cmd-left": "pane::ActivatePreviousItem",
+    },
+  },
+  {
+    "context": "RunModal",
+    "unbind": {
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-1": ["pane::ActivateItem", 0],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-3": ["pane::ActivateItem", 2],
+    },
+  },
+  {
+    "context": "KeymapEditor",
+    "bindings": {
+      "cmd-backspace": "keymap_editor::DeleteBinding",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-9": ["pane::ActivateItem", 8],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-8": ["pane::ActivateItem", 7],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-6": ["pane::ActivateItem", 5],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-7": ["pane::ActivateItem", 6],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-5": ["pane::ActivateItem", 4],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-4": ["pane::ActivateItem", 3],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-2": ["pane::ActivateItem", 1],
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-0": "pane::ActivateLastItem",
+    },
+  },
+  {
+    "context": "RunModal",
+    "unbind": {
+      "ctrl-tab": "pane::ActivateNextItem",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-9": ["workspace::ActivatePane", 8],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-8": ["workspace::ActivatePane", 7],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-7": ["workspace::ActivatePane", 6],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-6": ["workspace::ActivatePane", 5],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-5": ["workspace::ActivatePane", 4],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-4": ["workspace::ActivatePane", 3],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-3": ["workspace::ActivatePane", 2],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-2": ["workspace::ActivatePane", 1],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-1": ["workspace::ActivatePane", 0],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-1": ["pane::ActivateItem", 0],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-2": ["pane::ActivateItem", 1],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-3": ["pane::ActivateItem", 2],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-4": ["pane::ActivateItem", 3],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-5": ["pane::ActivateItem", 4],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-6": ["pane::ActivateItem", 5],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-7": ["pane::ActivateItem", 6],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-8": ["pane::ActivateItem", 7],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-9": ["pane::ActivateItem", 8],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-0": "pane::ActivateLastItem",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-w": "workspace::CloseActiveDock",
+    },
+  },
+  {
+    "unbind": {
+      "cmd-¨": [
+        "zed::IncreaseBufferFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "bindings": {
+      "cmd-+": ["action::Sequence", ["zed::IncreaseBufferFontSize", "zed::IncreaseUiFontSize"]],
+    },
+  },
+  {
+    "unbind": {
+      "cmd-!": [
+        "zed::IncreaseBufferFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "bindings": {
+      "cmd-=": ["action::Sequence", ["zed::ResetBufferFontSize", "zed::ResetUiFontSize"]],
+    },
+  },
+  {
+    "unbind": {
+      "cmd-0": [
+        "zed::ResetBufferFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Workspace && !Terminal",
+    "unbind": {
+      "cmd-n": "workspace::NewFile",
+    },
+  },
+  {
+    "context": "Workspace && !Terminal && !ProjectPanel",
+    "bindings": {
+      "cmd-n": "workspace::NewFile",
+    },
+  },
+  {
+    "context": "Pane || Terminal || ProjectPanel",
+    "bindings": {
+      "cmd-w": [
+        "pane::CloseActiveItem",
+        {
+          "close_pinned": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-t": "workspace::NewTerminal",
+    },
+  },
+  {
+    "context": "!Terminal && !KeymapEditor && !DebugPanel",
+    "bindings": {
+      "cmd-t": "terminal_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-.": "editor::ToggleCodeActions",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "f12": "editor::GoToDefinition",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-.": "editor::GoToTypeDefinition",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-f12": "editor::GoToTypeDefinition",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-i": "editor::ShowCompletions",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-space": "editor::ShowCompletions",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-i": "editor::ShowSignatureHelp",
+    },
+  },
+  {
+    "context": "Dock > Terminal",
+    "bindings": {
+      "cmd-shift-up": [
+        "workspace::IncreaseActiveDockSize",
+        {
+          "px": 75,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-alt-_": [
+        "workspace::DecreaseOpenDocksSize",
+        {
+          "px": 0,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-alt-!": [
+        "workspace::IncreaseOpenDocksSize",
+        {
+          "px": 0,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-alt-=": "workspace::ResetOpenDocksSize",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-alt-¨": [
+        "workspace::IncreaseActiveDockSize",
+        {
+          "px": 0,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Dock > Terminal",
+    "bindings": {
+      "cmd-shift-down": [
+        "workspace::DecreaseActiveDockSize",
+        {
+          "px": 75,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-alt--": [
+        "workspace::DecreaseActiveDockSize",
+        {
+          "px": 0,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Terminal",
+    "unbind": {
+      "cmd-n": "workspace::NewTerminal",
+    },
+  },
+  {
+    "context": "!Terminal",
+    "bindings": {
+      "cmd-shift-t": ["action::Sequence", ["terminal_panel::ToggleFocus", "terminal_panel::Toggle"]],
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-§": "pane::TogglePinTab",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "cmd-k shift-enter": "pane::TogglePinTab",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "backspace": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "delete": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "cmd-backspace": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": true,
+        },
+      ],
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-backspace": [
+        "project_panel::Trash",
+        {
+          "skip_prompt": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-r": "editor::ReloadFile",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-r": "projects::OpenRecent",
+    },
+  },
+  {
+    "context": "Welcome",
+    "bindings": {
+      "cmd-shift-r": "projects::OpenRecent",
+    },
+  },
+  {
+    "context": "Welcome",
+    "unbind": {
+      "cmd--": [
+        "zed::DecreaseUiFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Onboarding",
+    "unbind": {
+      "cmd--": [
+        "zed::DecreaseUiFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "unbind": {
+      "cmd--": [
+        "zed::DecreaseBufferFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "bindings": {
+      "cmd--": ["action::Sequence", ["zed::DecreaseBufferFontSize", "zed::DecreaseUiFontSize"]],
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-shift-n": "workspace::NewWindow",
+    },
+  },
+  {
+    "context": "Workspace && !ProjectPanel",
+    "bindings": {
+      "cmd-shift-n": "workspace::NewWindow",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "unbind": {
+      "alt-cmd-n": "project_panel::NewDirectory",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-shift-n": "project_panel::NewDirectory",
+    },
+  },
+  {
+    "context": "Onboarding",
+    "unbind": {
+      "cmd-¨": [
+        "zed::IncreaseUiFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Welcome",
+    "unbind": {
+      "cmd-¨": [
+        "zed::IncreaseUiFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Onboarding",
+    "unbind": {
+      "cmd-!": [
+        "zed::IncreaseUiFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Welcome",
+    "unbind": {
+      "cmd-!": [
+        "zed::IncreaseUiFontSize",
+        {
+          "persist": false,
+        },
+      ],
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-¨": "editor::ToggleFold",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-!": "editor::ToggleFoldAll",
+    },
+  },
 ]
