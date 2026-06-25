@@ -64,7 +64,7 @@ Darwin)
   ;;
 Linux)
   print "info" "OS detected: Linux"
-  do_restow "omarchy"
+  do_restow "ubuntu-server"
   ;;
 *)
   print "error" "Unknown OS: $OS"
