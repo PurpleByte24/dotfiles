@@ -26,14 +26,15 @@ source "$ZSH/oh-my-zsh.sh"
 # ------------------------------------------------------------
 # PATH (single authoritative block)
 # ------------------------------------------------------------
-export PATH="/opt/homebrew/bin:$HOME/bin:$HOME/bin/automation_scripts:$PATH"
+export PATH="$HOME/bin:$HOME/bin/automation_scripts:$PATH"
 
 # ------------------------------------------------------------
-# Locale / editor
+# Path & Environment Variables
 # ------------------------------------------------------------
 export LANG=en_US.UTF-8
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
+export KUBECONFIG=~/.kube/config
 
 # ------------------------------------------------------------
 # User Zsh config (XDG-compliant)
@@ -51,25 +52,6 @@ fi
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
 
-# ------------------------------------------------------------
-# Toolchains
-# ------------------------------------------------------------
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-
-# rust / cargo
-export CARGO_HOME="$HOME/.config/rust/cargo"
-export RUSTUP_HOME="$HOME/.config/rust/rustup"
-[ -s "$CARGO_HOME/env" ] && . "$CARGO_HOME/env"
-
 # -----------------------------------------------------
 # Terminal-specific extras
 # ------------------------------------------------------------
@@ -77,21 +59,40 @@ export RUSTUP_HOME="$HOME/.config/rust/rustup"
 # iTerm2 shell integration
 [ -e "$HOME/.iterm2_shell_integration.zsh" ] && source "$HOME/.iterm2_shell_integration.zsh"
 
-export KUBECONFIG=~/.kube/config
+DISABLE_AUTO_TITLE=true
 
-# Created by `pipx` on 2026-05-20 21:38:03
-export PATH="$PATH:/Users/neliogautschi/.local/bin"
+# ------------------------------------------------------------
+# Toolchains
+# ------------------------------------------------------------
 
-# pnpm
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# NVM (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# PNPM
 export PNPM_HOME="/Users/neliogautschi/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
+
+# Rust / Cargo
+export CARGO_HOME="$HOME/.config/rust/cargo"
+export RUSTUP_HOME="$HOME/.config/rust/rustup"
+[ -s "$CARGO_HOME/env" ] && . "$CARGO_HOME/env"
+
+# Pipx
+export PATH="$PATH:/Users/neliogautschi/.local/bin"
+
+# ------------------------------------------------------------
+# Last Line
+# ------------------------------------------------------------
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-DISABLE_AUTO_TITLE=true
