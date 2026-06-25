@@ -746,4 +746,38 @@
       "cmd-!": "editor::ToggleFoldAll",
     },
   },
+  {
+    "context": "Editor && extension == md",
+    "unbind": {
+      "cmd-shift-v": "markdown::OpenPreview"
+    }
+  },
+  {
+    "context": "Editor && extension == md",
+    "unbind": {
+      "cmd-k v": "markdown::OpenPreviewToTheSide"
+    }
+  },
+  {
+    "context": "Editor && extension == md",
+    "bindings": {
+      "cmd-shift-v": "markdown::OpenPreviewToTheSide"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt--": "workspace::ActivateNextPane"
+    }
+  },
+  {
+    "unbind": {
+      "shift-escape": "workspace::ToggleZoom"
+    }
+  },
+  {
+    "bindings": {
+      "alt-¨": "workspace::ToggleZoom"
+    }
+  }
 ]
