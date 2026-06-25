@@ -65,7 +65,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 
-# ------------------------------------------------------------
+# rust / cargo
+export CARGO_HOME="$HOME/.config/rust/cargo"
+export RUSTUP_HOME="$HOME/.config/rust/rustup"
+[ -s "$CARGO_HOME/env" ] && . "$CARGO_HOME/env"
+
+# -----------------------------------------------------
 # Terminal-specific extras
 # ------------------------------------------------------------
 
