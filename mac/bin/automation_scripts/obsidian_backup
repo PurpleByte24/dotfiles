@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Dynamically resolve paths using the user's home directory
+ICLOUD_VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault/"
+GIT_BACKUP="$HOME/repos/nToTheG/obsidian-vault-backup/"
+
+# 1. Sync iCloud files to the local Git backup folder
+rsync -av --delete \
+  --exclude='.git/' \
+  --exclude='.gitignore' \
+  --exclude='.obsidian/workspace.json' \
+  --exclude='.obsidian/workspace-mobile.json' \
+  --exclude='.obsidian/cache/' \
+  --exclude='.DS_Store' \
+  "$ICLOUD_VAULT" "$GIT_BACKUP"
+
+# 2. Go to the Git backup folder
+cd "$GIT_BACKUP" || exit
+
+# 3. Check if there are changes to commit
+if [[ -z $(git status --porcelain) ]]; then
+    echo "No changes detected."
+    exit 0
+fi
+
+# 4. Push to your private repo
+git add .
+git commit -m "Automated backup: $(date '+%Y-%m-%d %H:%M:%S')"
+git push origin main

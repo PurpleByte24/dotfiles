@@ -13,3 +13,6 @@ alias MA_SCRIPT="$s_path/ma_script"
 alias MONGO_TUNNEL="$s_path/mongo-tunnel"
 alias PG_TUNNEL="$s_path/pg-tunnel"
 alias B2_DL="$s_path/b2_downloader"
+alias cn="cargo new --vcs none"
+alias o_backup="$s_path/obsidian_backup"
+
