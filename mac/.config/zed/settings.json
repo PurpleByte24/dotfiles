@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "enable_language_server": true,
   "format_on_save": "on",
   "when_closing_with_no_tabs": "keep_window_open",
   "centered_layout": {
@@ -121,6 +122,9 @@
     "button": false,
   },
   "languages": {
+    "Rust": {
+      "tab_size": 4
+    },
     "Python": {
       "tab_size": 4,
     },
@@ -197,5 +201,14 @@
     "mode": "system",
     "light": "Catppuccin Latte",
     "dark": "Catppuccin Mocha",
+  },
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "check": {
+          "command": "clippy",
+        },
+      },
+    },
   },
 }
