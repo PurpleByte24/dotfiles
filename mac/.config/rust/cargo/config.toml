@@ -1,0 +1,35 @@
+# ==============================================================================
+# AUTHORITATIVE GLOBAL CARGO CONFIGURATION
+# ==============================================================================
+
+[build]
+# Speeds up local recompilations dramatically by avoiding repetitive file flushing.
+incremental = true
+
+# Forces Cargo to pass strict linting and target architecture instructions globally.
+rustflags = [
+    # --- Architecture Optimization ---
+    # Instructs LLVM to optimize binaries for your native M-series chip instructions.
+    "-C", "target-cpu=native",
+
+    # --- Strict Code Quality Guidelines (Clippy) ---
+    "-W", "clippy::pedantic",                       # Turn on the "strict code reviewer" pedantic suite
+    "-W", "clippy::cloned_instead_of_copied",       # Warns when clone is used on Copy types
+    "-W", "clippy::dbg_macro",                      # Prevents committing accidental debug macros
+    "-W", "clippy::todo",                           # Prevents leaving incomplete todo elements in production
+    "-W", "clippy::missing_docs_in_private_items",  # Enforces missing documentation comments
+    
+    # --- Extra Compilation Security ---
+    "-D", "warnings",                               # Upgrades all basic warnings to compiler errors
+]
+
+[term]
+# Ensures terminal error diagnostics remain vibrant and easily scan-readable.
+color = "always"
+progress.when = "always"
+progress.width = 80
+
+[net]
+# Prevents network timeouts during massive crate fetches by expanding window buffers.
+retry = 3
+git-fetch-with-cli = true
