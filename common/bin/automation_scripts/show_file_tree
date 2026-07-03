@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-tree -avC -I .git --gitignore --dirsfirst
+tree -avC -I .git --dirsfirst
 

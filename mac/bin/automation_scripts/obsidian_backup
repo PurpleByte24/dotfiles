@@ -2,7 +2,7 @@
 
 # Dynamically resolve paths using the user's home directory
 ICLOUD_VAULT="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Vault/"
-GIT_BACKUP="$HOME/repos/nToTheG/obsidian-vault-backup/"
+GIT_BACKUP="$HOME/repos/PurpleByte24/obsidian-vault-backup/"
 
 # 1. Sync iCloud files to the local Git backup folder
 rsync -av --delete \
