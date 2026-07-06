@@ -7,6 +7,13 @@ fi
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # ------------------------------------------------------------
+# Custom Completions Lookup
+# ------------------------------------------------------------
+if [ -d "$HOME/.config/zsh/completions" ]; then
+  fpath=("$HOME/.config/zsh/completions" $fpath)
+fi
+
+# ------------------------------------------------------------
 # Oh-My-Zsh
 # ------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
@@ -22,6 +29,15 @@ plugins=(
 )
 
 source "$ZSH/oh-my-zsh.sh"
+
+# ------------------------------------------------------------
+# Customizations
+# ------------------------------------------------------------
+# Show Dotfiles in Completions
+setopt globdots
+zstyle ':completion:*' special-dirs false
+zstyle ':completion:*' search-path-options --hidden --follow
+export FZF_COMPLETION_OPTS="--style=full"
 
 # ------------------------------------------------------------
 # PATH (single authoritative block)

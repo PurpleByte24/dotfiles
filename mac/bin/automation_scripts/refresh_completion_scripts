@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Target directory where completions live
+COMP_DIR="$HOME/.config/zsh/completions"
+
+if [ ! -d "$COMP_DIR" ]; then
+    echo "❌ Directory $COMP_DIR does not exist."
+    exit 1
+fi
+
+echo "🔄 Scanning $COMP_DIR and updating completions..."
+
+# Read every file in the directory
+for file in "$COMP_DIR"/*; do
+    [ -e "$file" ] || continue # Handle empty directory safely
+    
+    # Get just the clean name (e.g., "_uv", "uv.sh", or "uv" -> "uv")
+    base_name=$(basename "$file")
+    cmd="${base_name#_}"       # Strip leading underscore if present
+    cmd="${cmd%.sh}"          # Strip trailing .sh if present
+
+    # Check if the CLI tool is actually installed on the system
+    if ! command -v "$cmd" &>/dev/null; then
+        echo "⚠️  $cmd is not installed. Skipping."
+        continue
+    fi
+
+    # Clean up old formatting variations by forcing the correct Zsh naming convention
+    correct_file="$COMP_DIR/_$cmd"
+    if [ "$file" != "$correct_file" ]; then
+        rm -f "$file"
+    fi
+
+    # Dynamically generate based on how the tool handles completions
+    echo "  -> Regenerating _$cmd..."
+    case "$cmd" in
+        uv)
+            uv generate-shell-completion zsh > "$correct_file"
+            ;;
+        tailscale)
+            tailscale completion zsh > "$correct_file"
+            ;;
+        ruff)
+            ruff generate-shell-completion zsh > "$correct_file"
+            ;;
+        bun)
+            # Bun outputs its own zsh completion format natively
+            bun completions > "$correct_file" 2>/dev/null
+            ;;
+        *)
+            # Standard fallback used by many modern Go/Rust CLI frameworks (Cobra, Clap)
+            if "$cmd" completion zsh > "$correct_file" 2>/dev/null || \
+               "$cmd" completions zsh > "$correct_file" 2>/dev/null; then
+                :
+            else
+                echo "❌ Don't know how to generate completions for '$cmd'. Please add it to the script."
+                rm -f "$correct_file" # Don't leave a broken empty file
+            fi
+            ;;
+    esac
+done
+
+echo "✅ All completions refreshed!"
