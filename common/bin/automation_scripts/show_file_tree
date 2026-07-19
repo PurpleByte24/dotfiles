@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-tree -avC -I .git --dirsfirst
+tree -avC -I .git -I ".venv/**" -I ".ruff_cache" -I "**/__pycache__/**" --dirsfirst
 
