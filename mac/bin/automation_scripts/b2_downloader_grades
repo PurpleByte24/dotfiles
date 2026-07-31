@@ -4,7 +4,7 @@ ENDPOINT="s3.eu-central-003.backblazeb2.com"
 BUCKET="grades-backup-bucket"
 WORK_DIR="$HOME/mongo_backups_workspace"
 # --- Credentials ---
-export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/b2_creds"
+export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/b2_creds_grades"
 # 1. Setup Workspace
 mkdir -p "$WORK_DIR"
 rm -rf "$WORK_DIR"/*

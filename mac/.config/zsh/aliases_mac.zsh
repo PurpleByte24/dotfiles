@@ -17,7 +17,7 @@ alias PUSH_EXT="$s_path/push_version_to_vsx"
 alias MA_SCRIPT="$s_path/ma_script"
 alias MONGO_TUNNEL="$s_path/mongo-tunnel"
 alias PG_TUNNEL="$s_path/pg-tunnel"
-alias B2_DL="$s_path/b2_downloader"
+alias B2_DL="$s_path/b2_downloader_grades"
 alias cn="cargo new --vcs none"
 alias o_backup="$s_path/obsidian_backup"
 
