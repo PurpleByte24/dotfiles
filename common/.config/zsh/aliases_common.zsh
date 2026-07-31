@@ -17,3 +17,8 @@ alias l='ls -lAh'
 alias vz="nvim $HOME/.zshrc"
 alias sz="source $HOME/.zshrc"
 alias k='kubectl'
+alias g=rg
+alias f=fd
+alias e="eza -lah --no-quotes"
+alias et="eza -aT --no-quotes -I '.git|node_modules|.venv|__pycache__|dist'"
+alias b="bat --theme='Catppuccin Mocha'"
