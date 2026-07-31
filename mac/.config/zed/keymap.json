@@ -624,7 +624,6 @@
     },
   },
   {
-    "context": "Welcome",
     "bindings": {
       "cmd-shift-r": "projects::OpenRecent",
     },
@@ -749,35 +748,71 @@
   {
     "context": "Editor && extension == md",
     "unbind": {
-      "cmd-shift-v": "markdown::OpenPreview"
-    }
+      "cmd-shift-v": "markdown::OpenPreview",
+    },
   },
   {
     "context": "Editor && extension == md",
     "unbind": {
-      "cmd-k v": "markdown::OpenPreviewToTheSide"
-    }
+      "cmd-k v": "markdown::OpenPreviewToTheSide",
+    },
   },
   {
     "context": "Editor && extension == md",
     "bindings": {
-      "cmd-shift-v": "markdown::OpenPreviewToTheSide"
-    }
+      "cmd-shift-v": "markdown::OpenPreviewToTheSide",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
-      "alt--": "workspace::ActivateNextPane"
-    }
+      "alt--": "workspace::ActivateNextPane",
+    },
   },
   {
     "unbind": {
-      "shift-escape": "workspace::ToggleZoom"
-    }
+      "shift-escape": "workspace::ToggleZoom",
+    },
   },
   {
     "bindings": {
-      "alt-¨": "workspace::ToggleZoom"
+      "alt-¨": "workspace::ToggleZoom",
+    },
+  },
+  {
+    "context": "NotebookEditor",
+    "unbind": {
+      "cmd-shift-r": "notebook::RestartKernel",
+    },
+  },
+  {
+    "context": "NotebookEditor > Editor",
+    "unbind": {
+      "cmd-shift-r": "notebook::RestartKernel",
+    },
+  },
+  {
+    "context": "Workspace && !Terminal",
+    "unbind": {
+      "cmd-shift-r": "task::Spawn",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-d": "editor::ToggleSelectedDiffHunks",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-^": "editor::ToggleSelectedDiffHunks",
+    },
+  },
+  {
+    "context": "Editor",
+      "bindings": {
+      "alt-shift-d": "editor::ToggleAllDiffHunks"
     }
   }
 ]

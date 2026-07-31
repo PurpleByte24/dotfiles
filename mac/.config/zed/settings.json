@@ -65,9 +65,10 @@
     "dock": "bottom",
   },
   "git_panel": {
+    "group_by": "staging",
     "show_count_badge": false,
     "file_icons": true,
-    "tree_view": false,
+    "tree_view": true,
     "sort_by_path": false,
     "status_style": "label_color",
     "default_width": 240.0,
