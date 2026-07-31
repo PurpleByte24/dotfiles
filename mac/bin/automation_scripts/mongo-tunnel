@@ -11,8 +11,9 @@ if [ ! -f "$KUBE_CONFIG" ]; then
 fi
 
 # 2. Check if Tailscale is connected (optional but helpful)
-if ! utun=$(ifconfig | grep -i utun); then
+if [ "$(tailscale status --self=true)" = "Tailscale is stopped." ]; then
     echo "⚠️ Warning: Tailscale might not be active."
+    exit 1
 fi
 
 echo "🚀 Opening MongoDB tunnel to ThinkCentre..."
