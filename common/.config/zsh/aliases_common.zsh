@@ -16,4 +16,4 @@ alias gc='git commit -m'
 alias l='ls -lAh'
 alias vz="nvim $HOME/.zshrc"
 alias sz="source $HOME/.zshrc"
-
+alias k='kubectl'

@@ -43,6 +43,9 @@ for file in "$COMP_DIR"/*; do
         ruff)
             ruff generate-shell-completion zsh > "$correct_file"
             ;;
+        kubectl)
+            kubectl completion zsh > "$correct_file"
+            ;;
         bun)
             # Bun outputs its own zsh completion format natively
             bun completions > "$correct_file" 2>/dev/null
