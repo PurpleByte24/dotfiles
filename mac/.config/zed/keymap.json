@@ -814,5 +814,41 @@
       "bindings": {
       "alt-shift-d": "editor::ToggleAllDiffHunks"
     }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "alt-f": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "cmd-shift-h": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "ProjectSearchView",
+    "bindings": {
+      "alt-f": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "ProjectSearchView",
+    "unbind": {
+      "cmd-shift-h": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "ProjectSearchBar",
+    "bindings": {
+      "alt-f": "search::ToggleReplace"
+    }
+  },
+  {
+    "context": "ProjectSearchBar",
+    "unbind": {
+      "cmd-shift-h": "search::ToggleReplace"
+    }
   }
 ]
