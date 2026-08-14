@@ -17,7 +17,8 @@ for tool in aws docker; do
 done
 
 echo "🚀 Fetching backups..."
-FILES=(${(f)"$(aws s3 ls "s3://$BUCKET" --endpoint-url "https://$ENDPOINT" | awk '{print $4}' | grep -v '^$')"})
+LISTING="$(aws s3 ls "s3://$BUCKET" --endpoint-url "https://$ENDPOINT" | awk '{print $4}' | grep -v '^$')"
+FILES=(${(f)LISTING})
 
 if [ ${#FILES[@]} -eq 0 ]; then
     echo "❌ No backups found."
