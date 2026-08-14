@@ -2,21 +2,27 @@
 # --- Configuration ---
 ENDPOINT="s3.eu-central-003.backblazeb2.com"
 BUCKET="grades-backup-bucket"
-WORK_DIR="$HOME/mongo_backups_workspace"
+WORK_DIR="$HOME/Documents/mongo_backups_workspace"
 # --- Credentials ---
-export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/b2_creds_grades"
+export AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/b2_creds_grades"
 # 1. Setup Workspace
 mkdir -p "$WORK_DIR"
 rm -rf "$WORK_DIR"/*
 # 2. Tool Check
 for tool in aws docker; do
-    if ! command -v "$tool" &> /dev/null; then echo "❌ Missing $tool"; exit 1; fi
+    if ! command -v "$tool" &>/dev/null; then
+        echo "❌ Missing $tool"
+        exit 1
+    fi
 done
 
 echo "🚀 Fetching backups..."
 FILES=(${(f)"$(aws s3 ls "s3://$BUCKET" --endpoint-url "https://$ENDPOINT" | awk '{print $4}' | grep -v '^$')"})
 
-if [ ${#FILES[@]} -eq 0 ]; then echo "❌ No backups found."; exit 1; fi
+if [ ${#FILES[@]} -eq 0 ]; then
+    echo "❌ No backups found."
+    exit 1
+fi
 
 for i in {1..${#FILES[@]}}; do
     echo "  [$i] ${FILES[$i]}"
@@ -25,7 +31,8 @@ echo -n "👉 Select number: "
 read -r SELECTION
 
 if ! [[ "$SELECTION" =~ ^[0-9]+$ ]] || [ "$SELECTION" -lt 1 ] || [ "$SELECTION" -gt "${#FILES[@]}" ]; then
-    echo "❌ Invalid selection."; exit 1
+    echo "❌ Invalid selection."
+    exit 1
 fi
 
 FILENAME="${FILES[$SELECTION]}"

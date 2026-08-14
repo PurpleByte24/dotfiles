@@ -1,0 +1,12 @@
+import atexit
+import os
+import readline
+
+history_path = os.path.expanduser("~/.cache/python_history")
+if os.path.exists(history_path):
+    readline.read_history_file(history_path)
+
+def save_history():
+    readline.write_history_file(history_path)
+
+atexit.register(save_history)

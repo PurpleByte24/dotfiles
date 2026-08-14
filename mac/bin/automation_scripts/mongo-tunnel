@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the path to your config 
-KUBE_CONFIG="$HOME/.k8s/thinkcentre-config.yaml"
+KUBE_CONFIG="$HOME/.config/kube/config"
 
 # 1. Check if the config file actually exists
 if [ ! -f "$KUBE_CONFIG" ]; then

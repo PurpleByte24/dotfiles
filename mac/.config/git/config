@@ -1,0 +1,20 @@
+[includeIf "gitdir:~/repos/PurpleByte24/"]
+  path = ~/.config/git/config-github
+
+[includeIf "gitdir:~/repos/gitea/"]
+  path = ~/.config/git/config-gitea
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[core]
+	excludesfile = ~/.config/git/ignore
+	editor = nvim
+	pager = less -FRX
+
+[commit]
+	template = /Users/neliogautschi/.stCommitMsg
+
