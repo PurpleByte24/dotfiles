@@ -19,6 +19,6 @@ alias k='kubectl'
 alias g=rg
 alias f='fd -H'
 alias e="eza -lah --no-quotes --color=always"
-alias et="eza -aT --no-quotes --color=always -I '.git|node_modules|.venv|__pycache__|dist'"
+alias et="eza -aT --no-quotes --color=always -I '.git|node_modules|.venv|__pycache__|dist|target'"
 alias b="bat --theme='Catppuccin Mocha'"
 alias watch='watch -c '
