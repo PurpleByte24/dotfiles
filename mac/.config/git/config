@@ -13,8 +13,14 @@
 [core]
 	excludesfile = ~/.config/git/ignore
 	editor = nvim
-	pager = less -FRX
+  pager = delta
 
 [commit]
 	template = /Users/neliogautschi/.stCommitMsg
 
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    side-by-side = true

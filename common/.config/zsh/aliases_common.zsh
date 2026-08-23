@@ -1,4 +1,5 @@
-# My Aliases For Shell Scripts
+# sudo must be at the top
+alias sudo='sudo '
 
 s_path="$HOME/bin/automation_scripts"
 
@@ -22,3 +23,9 @@ alias e="eza -lah --no-quotes --color=always"
 alias et="eza -aT --no-quotes --color=always -I '.git|node_modules|.venv|__pycache__|dist|target'"
 alias b="bat --theme='Catppuccin Mocha'"
 alias watch='watch -c '
+alias d='delta'
+alias du='dust'
+alias df='duf'
+alias top='btm'
+alias c='choose'
+
