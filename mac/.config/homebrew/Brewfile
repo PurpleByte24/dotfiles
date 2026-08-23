@@ -1,0 +1,169 @@
+tap "mongodb/brew"
+# Simple, modern, secure file encryption
+brew "age"
+# GitOps Continuous Delivery for Kubernetes
+brew "argocd"
+# GNU compiler collection for arm-none-eabi
+brew "arm-none-eabi-gcc", link: false
+# Aquarium animation in ASCII art
+brew "asciiquarium"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Language Server for Bash
+brew "bash-language-server"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# GNU binary tools for native development
+brew "binutils"
+# Yet another cross-platform graphical process/system monitor
+brew "bottom"
+# Human-friendly and fast alternative to cut and (sometimes) awk
+brew "choose-rust"
+# Console Matrix
+brew "cmatrix"
+# Library for USB device access
+brew "libusb"
+# USB programmer
+brew "dfu-util"
+# Disk Usage/Free Utility - a better 'df' alternative
+brew "duf"
+# More intuitive version of du in rust
+brew "dust"
+# Modern, maintained replacement for ls
+brew "eza"
+# Like neofetch, but much faster because written mostly in C
+brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Fast web fuzzer written in Go
+brew "ffuf"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Distributed revision control system
+brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Git extension for versioning large files
+brew "git-lfs"
+# Kubernetes package manager
+brew "helm"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# Little helper to run CNCF's k3s in Docker
+brew "k3d"
+# Flexible Kustomize Plugin for SOPS Encrypted Resources
+brew "ksops"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Template-free customization of Kubernetes YAML manifests
+brew "kustomize"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Postgres C API library
+brew "libpq"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# List USB devices, just like the Linux lsusb command
+brew "lsusb"
+# Language Server for the Lua language
+brew "lua-language-server"
+# Run a Kubernetes cluster locally
+brew "minikube"
+# Atlas CLI enables you to manage your MongoDB Atlas
+brew "mongodb-atlas-cli"
+# Incremental parsing library
+brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Port scanning utility for large networks
+brew "nmap"
+# Create, run, and share large language models (LLMs)
+brew "ollama", restart_service: :changed
+# CLI for Postgres with auto-completion and syntax highlighting
+brew "pgcli"
+# Animated pipes terminal screensaver
+brew "pipes-sh"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# Fast, disk space efficient package manager
+brew "pnpm"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Theme for zsh
+brew "powerlevel10k"
+# Modern replacement for ps written in Rust
+brew "procs"
+# Monitor data's progress through a pipe
+brew "pv"
+# Python bindings for v5 of Qt
+brew "pyqt@5"
+# Static type checker for Python
+brew "pyright"
+# Python interface to Tcl/Tk
+brew "python-tk@3.14"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
+# Generic machine emulator and virtualizer
+brew "qemu"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Intuitive find & replace CLI
+brew "sd"
+# ANSI C compiler for Intel 8051, Maxim 80DS390, and Zilog Z80
+brew "sdcc"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Autoformat shell script source code
+brew "shfmt"
+# Prints a steam locomotive if you type sl instead of ls
+brew "sl"
+# Editor of encrypted files
+brew "sops"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Language Server Protocol implementation for TypeScript wrapping tsserver
+brew "typescript-language-server"
+# Maintained ctags implementation
+brew "universal-ctags"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Vi 'workalike' with many additional features
+brew "vim"
+# Language servers for HTML, CSS, JavaScript, and JSON extracted from vscode
+brew "vscode-langservers-extracted"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Library to create, extract, and modify Windows Imaging files
+brew "wimlib"
+# Tools for the WireGuard secure network tunnel
+brew "wireguard-tools"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Real-time type-ahead completion for Zsh
+brew "zsh-autocomplete"
+# Android SDK component
+cask "android-platform-tools"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
+cask "font-jetbrains-mono-nerd-font"
+# Pre-built GNU bare-metal toolchain for 32-bit Arm processors
+cask "gcc-arm-embedded"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# System monitor for the menu bar
+cask "stats"
+# Python IDE for beginners
+cask "thonny"
+# Multi-platform VNC client and server
+cask "tigervnc"
+

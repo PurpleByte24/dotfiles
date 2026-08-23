@@ -35,6 +35,7 @@ export npm_config_cache="$XDG_CACHE_HOME/npm"
 
 # Homebrew services per-formula env overrides (brew services restart reads this)
 export HOMEBREW_USER_CONFIG_HOME="$XDG_CONFIG_HOME/homebrew"
+export HOMEBREW_BUNDLE_FILE_GLOBAL="$HOMEBREW_USER_CONFIG_HOME/.Brewfile"
 
 # Vendor apps with hardcoded home-dir paths (no XDG/env-var support):
 # symlink into .config or .cache depending on content, re-create the
