@@ -19,4 +19,4 @@ source_zsh_dir "$HOME/.config/zsh"
 # ------------------------------------------------------------
 # Powerlevel10k theme config
 # ------------------------------------------------------------
-[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+[[ -f "$HOME/.config/zsh/p10k.zsh" ]] && source "$HOME/.config/zsh/p10k.zsh"
