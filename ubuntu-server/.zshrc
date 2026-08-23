@@ -1,61 +1,22 @@
 # ------------------------------------------------------------
-# Powerlevel10k instant prompt (must be at the very top)
+# Shared module loader (defines source_zsh_dir)
 # ------------------------------------------------------------
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+source "$HOME/.config/zsh/lib/source_dir.zsh"
 
 # ------------------------------------------------------------
-# Oh-My-Zsh
+# Pre-Oh-My-Zsh setup (instant prompt, fpath, omz config, compdump)
 # ------------------------------------------------------------
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-CASE_SENSITIVE="true"
-
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  fzf-tab
-)
+source_zsh_dir "$HOME/.config/zsh/pre-omz"
 
 source "$ZSH/oh-my-zsh.sh"
 
 # ------------------------------------------------------------
-# PATH (single authoritative block)
+# User Zsh Module Sourcing
 # ------------------------------------------------------------
-export PATH="$HOME/bin:$HOME/bin/automation_scripts:$PATH"
-
-# ------------------------------------------------------------
-# Locale / editor
-# ------------------------------------------------------------
-export LANG=en_US.UTF-8
-export EDITOR=vim
-export VISUAL=vim
-
-# ------------------------------------------------------------
-# User Zsh config (XDG-compliant)
-# Aliases, functions, env overrides
-# ------------------------------------------------------------
-if [ -d "$HOME/.config/zsh" ]; then
-  for f in "$HOME/.config/zsh"/*.zsh; do
-    [ -r "$f" ] && source "$f"
-  done
-fi
+# Load all custom modular configs (aliases, functions, shell behavior)
+source_zsh_dir "$HOME/.config/zsh"
 
 # ------------------------------------------------------------
 # Powerlevel10k theme config
 # ------------------------------------------------------------
 [[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
-
-# ------------------------------------------------------------
-# Kubernetes / homelab
-# ------------------------------------------------------------
-export KUBECONFIG=~/.kube/config
-
-# ------------------------------------------------------------
-# Shell behavior
-# ------------------------------------------------------------
-DISABLE_AUTO_TITLE=true
