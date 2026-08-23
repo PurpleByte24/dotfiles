@@ -16,7 +16,8 @@ alias gc='git commit -m'
 alias l='ls -lAh'
 alias vz="nvim $HOME/.zshrc"
 alias sz="source $HOME/.zshrc"
-alias k='kubectl'
+alias k='kubectl --cache-dir="$XDG_CACHE_HOME/kube"'
+alias kubectl='command kubectl --cache-dir="$XDG_CACHE_HOME/kube"'
 alias g=rg
 alias f='fd -H'
 alias e="eza -lah --no-quotes --color=always"
