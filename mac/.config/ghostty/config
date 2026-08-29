@@ -17,7 +17,7 @@ cursor-style-blink = false
 shell-integration = zsh
 shell-integration-features = cursor,sudo,title
 
-# ── Keybinds (kept minimal — yabai/skhd own window management) ──
+# ── Keybinds ───────────────────────────────────────────────
 keybind = cmd+t=new_tab
 keybind = cmd+w=close_surface
 keybind = cmd+shift+left_bracket=previous_tab

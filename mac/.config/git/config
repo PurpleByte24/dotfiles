@@ -1,4 +1,4 @@
-[includeIf "gitdir:~/repos/PurpleByte24/"]
+[includeIf "gitdir:~/repos/github/"]
   path = ~/.config/git/config-github
 
 [includeIf "gitdir:~/repos/gitea/"]
