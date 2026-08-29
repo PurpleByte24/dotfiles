@@ -10,8 +10,8 @@
 
 # Base Environment
 export LANG=en_US.UTF-8
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # XDG Base Paths
 export XDG_CONFIG_HOME="$HOME/.config"
