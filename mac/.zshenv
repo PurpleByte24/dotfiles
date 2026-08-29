@@ -1,22 +1,12 @@
 # ------------------------------------------------------------
-# Sourced by EVERY zsh invocation — login, interactive, and
-# non-interactive (scripts, tool calls, cron, git hooks, ssh
-# commands). Keep this to plain env vars / PATH only.
-#
-# Anything interactive (prompt theme, plugins, completions,
-# aliases, slow activation scripts like nvm/rustup) belongs in
-# ~/.zshrc instead, which non-interactive shells never read.
+# Sourced by EVERY zsh invocation — see env_common.zsh for the
+# full explanation and the vars shared with other OSes.
 # ------------------------------------------------------------
+source "$HOME/.config/zsh/env_common.zsh"
 
-# Base Environment
-export LANG=en_US.UTF-8
-export EDITOR=nvim
-export VISUAL=nvim
-
-# XDG Base Paths
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
+# ------------------------------------------------------------
+# Mac-specific env
+# ------------------------------------------------------------
 
 # Kubernetes & Docker
 export KUBECONFIG="$HOME/.config/kube/config"
@@ -59,9 +49,8 @@ export CARGO_HOME="$HOME/.config/rust/cargo"
 export RUSTUP_HOME="$HOME/.config/rust/rustup"
 
 # ------------------------------------------------------------
-# Executable PATH
+# Executable PATH (additions on top of env_common.zsh's base)
 # ------------------------------------------------------------
-export PATH="$HOME/bin:$HOME/bin/automation_scripts:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$KREW_ROOT/bin:$PATH"
 case ":$PATH:" in
