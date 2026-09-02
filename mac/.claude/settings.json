@@ -1,0 +1,46 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "pyright-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "tui": "fullscreen",
+  "theme": "auto",
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(kubectl delete:*) — ArgoCD-managed resources in k8s-infra: OK only after explicit confirmation, never silent",
+      "Bash(kubectl apply:*) / Bash(kubectl edit:*) on ArgoCD-managed resources — CLAUDE.md marks these as always-ask, no exceptions"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: purplebyte24 (self-hosted Gitea, host alias `gitea:`)",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: assume private unless the remote host and repo name indicate otherwise, or a visibility check in the transcript shows public (not queryable via gh — self-hosted Gitea remote — inferred private)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: SOPS (encrypted in git) for most secrets; a few bootstrap secrets live in Bitwarden",
+      "**Default / protected branches**: unknown — origin/HEAD unset; not queryable via gh for this host",
+      "**CI/CD deploy targets**: Gitea Actions (ephemeral KVM runners via kvm-infra; custom gitea-runner image)",
+      "**Network posture**: None configured",
+      "**Source control**: gitea:purplebyte24/gitea-backup-tools.git (this repo's only remote) — self-hosted Gitea under ~/repos/gitea/purplebyte24/",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: self-hosted Gitea (purplebyte24 org); one remote Kubernetes node reachable via kubectl from this machine (its Cloudflare host-level config lives on that separate host, not here)",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: `infra` namespace for infra components; ArgoCD-managed resources in k8s-infra must not be edited/applied directly (change source in k8s-infra instead) — otherwise falls back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment; ArgoCD-managed cluster manifests in k8s-infra (source of truth for the cluster — change via source, not direct kubectl edit/apply)",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development / infra-GitOps work (Dockerfile + backup/restore tooling for Gitea; kubectl, docker, sops, aws-cli usage)",
+      "**Trusted repo**: gitea-backup-tools (this repo), remote gitea:purplebyte24/gitea-backup-tools.git — visibility unconfirmed, assume private",
+      "**Org-specific CLIs**: kubectl (aliased `k`), k9s, sops, tailscale, kustomize, gitea/Gitea Actions tooling",
+      "**routine under ~/repos/gitea/purplebyte24/ prefix**: all infra repos (k8s-infra, kvm-infra, prebaked-gitea-runner, cicd-common, gitea-backup-tools) live here and are treated as the trusted infra tree"
+    ]
+  }
+}
