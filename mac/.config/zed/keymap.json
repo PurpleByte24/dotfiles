@@ -94,6 +94,10 @@
     "context": "Terminal",
     "bindings": {
       "cmd-shift-t": "terminal_panel::ToggleFocus",
+      "shift-enter": [
+        "terminal::SendText",
+        "\u001b\r"
+      ],
     },
   },
   {
