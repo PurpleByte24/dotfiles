@@ -1,0 +1,20 @@
+k9s:
+  cluster: default
+  namespace:
+    active: infra
+    lockFavorites: true
+    favorites:
+      - infra
+      - gitea
+      - vaultwarden
+      - tailscale
+      - monitoring
+      - notify-service
+      - my-resume
+      - matrix
+      - default
+  view:
+    active: argoproj.io/v1alpha1/applications all
+  featureGates:
+    nodeShell: false
+  proxy: null

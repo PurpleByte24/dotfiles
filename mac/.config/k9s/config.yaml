@@ -11,7 +11,7 @@ k9s:
     skin: gruvbox-dark
     enableMouse: false
     headless: false
-    logoless: false
+    logoless: true
     crumbsless: false
     splashless: false
     reactive: false
