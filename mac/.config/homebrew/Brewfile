@@ -23,6 +23,8 @@ brew "node"
 brew "bash-language-server"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# TUI for managing Homebrew, Flatpak, and Mac App Store packages
+brew "bbrew"
 # GNU binary tools for native development
 brew "binutils"
 # Yet another cross-platform graphical process/system monitor

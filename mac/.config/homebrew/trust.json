@@ -1,0 +1,7 @@
+{
+  "trustedtaps": [
+    "derailed/k9s",
+    "mongodb/brew",
+    "purplebyte24/hyperwm"
+  ]
+}

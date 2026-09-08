@@ -17,15 +17,13 @@ export AWS_CONFIG_FILE="$HOME/.config/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials"
 
 # AI Tools
-export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
-[ -e "$HOME/.claude" ] || ln -s "$HOME/.config/claude" "$HOME/.claude"
 export GEMINI_CONFIG_DIR="$HOME/.config/gemini"
 export OLLAMA_MODELS="$XDG_DATA_HOME/ollama/models"
 export npm_config_cache="$XDG_CACHE_HOME/npm"
 
 # Homebrew services per-formula env overrides (brew services restart reads this)
 export HOMEBREW_USER_CONFIG_HOME="$XDG_CONFIG_HOME/homebrew"
-export HOMEBREW_BUNDLE_FILE_GLOBAL="$HOMEBREW_USER_CONFIG_HOME/Brewfile"
+export HOMEBREW_BUNDLE_FILE="$HOMEBREW_USER_CONFIG_HOME/Brewfile"
 
 # Python
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
