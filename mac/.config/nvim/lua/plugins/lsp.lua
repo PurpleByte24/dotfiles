@@ -34,52 +34,59 @@ return {
           end
           map("gd", vim.lsp.buf.definition, "Go to definition")
           map("K", vim.lsp.buf.hover, "Hover documentation")
-          map("<leader>d", vim.diagnostic.open_float, "Show diagnostic")
         end,
       })
 
-      -- 4. Use mason-lspconfig to bridge into Neovim's updated native config manager
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "pyright", "ruff" },
-        handlers = {
-          function(server_name)
-            local server = vim.lsp.config[server_name] or {}
-            server.setup = server.setup or {}
-            require("lspconfig")[server_name].setup(server.setup)
-          end,
+      -- 4. Per-server settings via the native vim.lsp.config() API
+      -- (mason-lspconfig v2+ removed the old `handlers` bridge; it now auto-enables
+      -- installed servers via vim.lsp.enable(), picking up whatever is registered here)
 
-          -- Pyright: type checking only, let ruff own linting
-          ["pyright"] = function()
-            require("lspconfig").pyright.setup({
-              settings = {
-                pyright = {
-                  disableOrganizeImports = true, -- ruff handles this
-                },
-                python = {
-                  analysis = {
-                    ignore = { "*" }, -- suppress pyright style/lint noise
-                    typeCheckingMode = "basic",
-                  },
-                },
-              },
-            })
-          end,
-
-          -- Ruff: linting + formatting diagnostics
-          ["ruff"] = function()
-            require("lspconfig").ruff.setup({
-              init_options = {
-                settings = {
-                  lint = {
-                    select = { "E", "W", "F", "I", "N", "UP", "B" },
-                    -- E/W = pycodestyle (PEP-8), F = pyflakes, I = isort,
-                    -- N = naming, UP = pyupgrade, B = bugbear
-                  },
-                },
-              },
-            })
-          end,
+      -- Pyright: type checking only, let ruff own linting
+      vim.lsp.config("pyright", {
+        settings = {
+          pyright = {
+            disableOrganizeImports = true, -- ruff handles this
+          },
+          python = {
+            analysis = {
+              ignore = { "*" }, -- suppress pyright style/lint noise
+              typeCheckingMode = "basic",
+            },
+          },
         },
+      })
+
+      -- Ruff: linting + formatting diagnostics
+      vim.lsp.config("ruff", {
+        init_options = {
+          settings = {
+            lint = {
+              select = { "E", "W", "F", "I", "N", "UP", "B" },
+              -- E/W = pycodestyle (PEP-8), F = pyflakes, I = isort,
+              -- N = naming, UP = pyupgrade, B = bugbear
+            },
+          },
+        },
+      })
+
+      -- Rust: use clippy instead of plain cargo check for linting
+      vim.lsp.config("rust_analyzer", {
+        settings = {
+          ["rust-analyzer"] = {
+            check = {
+              command = "clippy",
+              extraArgs = { "--all", "--", "-W", "clippy::all" },
+            },
+            cargo = {
+              allFeatures = true,
+            },
+          },
+        },
+      })
+
+      -- 5. Ensure servers are installed; mason-lspconfig auto-enables them via vim.lsp.enable()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls", "pyright", "ruff", "rust_analyzer" },
       })
     end,
   },

@@ -1,4 +1,6 @@
 -- lua/mappings.lua
+-- Note: buffer-local keymaps set on attach (gd/K in plugins/lsp.lua, <leader>gp in
+-- plugins/gitsigns.lua) live in their plugin files instead of here.
 local keymap = vim.keymap
 
 -- ==========================================
@@ -126,7 +128,7 @@ keymap.set("n", "<leader>x", function()
 end, { silent = true, desc = "Close current file tab" })
 
 -- ==========================================
--- GROUP 6: SEARCH AND REPLACE
+-- GROUP 7: SEARCH AND REPLACE
 -- ==========================================
 -- In-file search and replace (populates with word under cursor)
 keymap.set("n", "<leader>F", function()

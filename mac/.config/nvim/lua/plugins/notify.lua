@@ -17,15 +17,7 @@ return {
       })
 
       -- 2. Modern Route: Redirect Neovim's default print mechanism to our new UI
-      vim.notify = function(msg, level, opts)
-        -- Inject our high-performance filter rule directly here!
-        if msg and msg:find("client%.request is deprecated") then
-          return -- Drop the annoying client.request warning silently
-        end
-
-        -- Pass all other valid warnings and messages to the floating window UI
-        notify(msg, level, opts)
-      end
+      vim.notify = notify
     end,
   },
 }

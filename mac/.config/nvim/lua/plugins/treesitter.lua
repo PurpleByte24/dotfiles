@@ -11,7 +11,10 @@ return {
         install_dir = vim.fn.stdpath("data") .. "/site"
       })
 
-      ts.install({ "lua", "python", "markdown", "markdown_inline", "bash" })
+      -- Defer the install check off the synchronous startup path
+      vim.schedule(function()
+        ts.install({ "lua", "python", "rust", "markdown", "markdown_inline", "bash" })
+      end)
 
       -- Auto-activate treesitter highlighting on every buffer
       vim.api.nvim_create_autocmd("FileType", {

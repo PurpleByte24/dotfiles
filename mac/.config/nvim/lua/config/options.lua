@@ -86,9 +86,6 @@ opt.colorcolumn = "100"    -- Vertical guide line at column 100
 -- Ensure rich 24-bit RGB terminal theme rendering
 opt.termguicolors = true
 
--- Suppress background API deprecation warning logs from older external plugins
-vim.g.deprecation_warnings = false
-
 -- ==========================================
 -- PERFORMANCE GREP CONFIG (RipGrep support)
 -- ==========================================
