@@ -82,6 +82,11 @@ opt.pumblend = 5           -- Slight transparency for the completion menu
 
 opt.signcolumn = "yes:1"   -- Keep the git status/error column open permanently
 
+-- Fold by code structure (via treesitter) instead of manual/indent folding
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99         -- Start with everything unfolded
+
 -- Ensure rich 24-bit RGB terminal theme rendering
 opt.termguicolors = true
 
