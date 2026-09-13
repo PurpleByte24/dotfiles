@@ -63,6 +63,7 @@ opt.shiftround = true  -- Round indent spaces to match shiftwidth
 -- ==========================================
 opt.number = true          -- Show line number
 opt.relativenumber = true  -- Show relative distance numbers
+opt.cursorline = true      -- Highlight the current line
 
 opt.ignorecase = true      -- Case-insensitive searching...
 opt.smartcase = true       -- ...until an uppercase letter is explicitly typed
