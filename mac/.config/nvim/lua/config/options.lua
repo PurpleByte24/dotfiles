@@ -81,7 +81,6 @@ opt.pumheight = 10         -- Limit dropdown menu to 10 rows max
 opt.pumblend = 5           -- Slight transparency for the completion menu
 
 opt.signcolumn = "yes:1"   -- Keep the git status/error column open permanently
-opt.colorcolumn = "100"    -- Vertical guide line at column 100
 
 -- Ensure rich 24-bit RGB terminal theme rendering
 opt.termguicolors = true
