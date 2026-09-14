@@ -85,12 +85,6 @@ keymap.set("n", "gJ", function()
     ]])
 end, { desc = "Join lines without moving cursor" })
 
--- Move the current line (or visual selection) up/down, reindenting after
-keymap.set("n", "<A-j>", "<cmd>move .+1<cr>==", { desc = "Move line down" })
-keymap.set("n", "<A-k>", "<cmd>move .-2<cr>==", { desc = "Move line up" })
-keymap.set("v", "<A-j>", ":move '>+1<cr>gv=gv", { desc = "Move selection down" })
-keymap.set("v", "<A-k>", ":move '<-2<cr>gv=gv", { desc = "Move selection up" })
-
 -- Break inserted text into smaller undo units on punctuation marks
 local undo_ch = { ",", ".", "!", "?", ";", ":" }
 for _, ch in ipairs(undo_ch) do
