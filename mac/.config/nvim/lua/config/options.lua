@@ -92,6 +92,15 @@ opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevel = 99         -- Start with everything unfolded
 opt.foldenable = false     -- Never auto-close folds (e.g. on InsertLeave); zi to toggle manually
 
+-- gitsigns' diff/blame views run z-fold commands (zR/za/zv) internally, and
+-- per Vim's own semantics those re-enable 'foldenable' as a side effect even
+-- though we want it permanently off — reassert on returning to a window.
+vim.api.nvim_create_autocmd("WinEnter", {
+  callback = function()
+    vim.wo.foldenable = false
+  end,
+})
+
 -- Ensure rich 24-bit RGB terminal theme rendering
 opt.termguicolors = true
 
