@@ -70,16 +70,23 @@ return {
       })
 
       -- Rust: use clippy instead of plain cargo check for linting
+      -- checkOnSave scoped to the current package (not --all/allFeatures): on an
+      -- 8GB M1, whole-workspace + all-features clippy on every save forks real
+      -- clippy-driver processes heavy enough to stall the UI for ~1s (confirmed
+      -- via live process monitoring, see nvim/PROGRESS.md).
+      -- numThreads capped: rust-analyzer defaults to one worker per logical CPU
+      -- (8 here), and this machine already sits near its memory ceiling at rest
+      -- (~460MB free, 2.6GB compressed) — an 8-wide analysis burst on every
+      -- keystroke was starving nvim's main thread of scheduling time even with
+      -- no save involved. Left headroom for the 4 performance cores + UI/OS.
       vim.lsp.config("rust_analyzer", {
         settings = {
           ["rust-analyzer"] = {
             check = {
               command = "clippy",
-              extraArgs = { "--all", "--", "-W", "clippy::all" },
+              extraArgs = { "--", "-W", "clippy::all" },
             },
-            cargo = {
-              allFeatures = true,
-            },
+            numThreads = 3,
           },
         },
       })

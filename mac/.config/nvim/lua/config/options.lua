@@ -77,7 +77,10 @@ opt.mouse = "n"            -- Enable mouse clicks inside Normal mode buffers
 opt.showmode = false       -- Statusline plugin handles mode displays, hide default
 
 -- Complete options for popup auto-suggestions
-opt.completeopt = { "menuone", "noselect" }
+-- "noselect" leaves no item selected, so blink.cmp's <CR> accept has nothing
+-- to accept and falls back to a literal newline; "noinsert" keeps that fixed
+-- while still not auto-inserting ghost text as you type.
+opt.completeopt = { "menu", "menuone", "noinsert" }
 opt.pumheight = 10         -- Limit dropdown menu to 10 rows max
 opt.pumblend = 5           -- Slight transparency for the completion menu
 
@@ -87,6 +90,7 @@ opt.signcolumn = "yes:1"   -- Keep the git status/error column open permanently
 opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevel = 99         -- Start with everything unfolded
+opt.foldenable = false     -- Never auto-close folds (e.g. on InsertLeave); zi to toggle manually
 
 -- Ensure rich 24-bit RGB terminal theme rendering
 opt.termguicolors = true
