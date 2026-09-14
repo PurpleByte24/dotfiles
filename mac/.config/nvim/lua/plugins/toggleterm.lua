@@ -1,7 +1,7 @@
 return {
   "akinsho/toggleterm.nvim",
   opts = {
-    open_mapping = [[<C-t>]],
+    open_mapping = [[<leader>t]],
     direction = "float",
     float_opts = {
       border = "rounded",
