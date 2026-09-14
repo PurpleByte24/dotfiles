@@ -15,7 +15,7 @@ vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { silent = true, desc = "Open 
 
 -- Fast Saving & Window Closing
 keymap.set("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "Save buffer" })
-keymap.set("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "Quit current window" })
+keymap.set("n", "<leader>q", "<cmd>xa<cr>", { silent = true, desc = "Quit Neovim entirely" })
 
 -- Escape forcefully closes annoying floating pop-ups/menus
 keymap.set("n", "<Esc>", function()

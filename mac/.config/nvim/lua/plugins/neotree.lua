@@ -23,21 +23,23 @@ return {
             end
           end
 
-          -- Execute your custom smart routing rules
-          if neotree_win then
-            if vim.api.nvim_get_current_win() == neotree_win then
-              -- If open AND focused: close it entirely
-              vim.cmd("Neotree close")
-            else
-              -- If open but NOT focused: jump focus right into it
-              vim.cmd("Neotree focus")
-            end
+          if neotree_win and vim.api.nvim_get_current_win() == neotree_win then
+            -- Already focused in the explorer: switch back to whatever had focus before
+            vim.cmd("wincmd p")
           else
-            -- FORCE focus immediately upon a fresh opening
+            -- Not focused in the explorer (open or closed): focus it, opening if needed.
+            -- Never closes the explorer.
             vim.cmd("Neotree focus left")
           end
         end,
-        desc = "Smart Neo-tree Toggle/Focus",
+        desc = "Switch focus to/from explorer",
+      },
+      {
+        "<leader>.",
+        function()
+          require("neo-tree.command").execute({ action = "show", toggle = true, position = "left" })
+        end,
+        desc = "Toggle explorer (keep focus)",
       },
       {
         "<leader>bf",
