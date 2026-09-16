@@ -13,7 +13,7 @@ return {
 
       -- Defer the install check off the synchronous startup path
       vim.schedule(function()
-        ts.install({ "lua", "python", "rust", "markdown", "markdown_inline", "bash" })
+        ts.install({ "lua", "python", "rust", "java", "markdown", "markdown_inline", "bash" })
       end)
 
       -- Auto-activate treesitter highlighting on every buffer

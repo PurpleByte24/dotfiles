@@ -93,7 +93,7 @@ return {
 
       -- 5. Ensure servers are installed; mason-lspconfig auto-enables them via vim.lsp.enable()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "pyright", "ruff", "rust_analyzer" },
+        ensure_installed = { "lua_ls", "pyright", "ruff", "rust_analyzer", "jdtls" },
       })
     end,
   },

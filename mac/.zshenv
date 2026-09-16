@@ -28,6 +28,9 @@ export HOMEBREW_BUNDLE_FILE="$HOMEBREW_USER_CONFIG_HOME/Brewfile"
 # Python
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 
+# Java
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 # Development Toolchain directories (activation scripts stay in .zshrc)
 export GOPATH="$XDG_DATA_HOME/go"
 export KREW_ROOT="$HOME/.config/krew"
