@@ -1,0 +1,70 @@
+#!/bin/zsh
+# --- Configuration ---
+ENDPOINT="s3.eu-central-003.backblazeb2.com"
+BUCKET="gitea-instance-backup-bucket"
+PREFIX="gitea-dump/"
+WORK_DIR="$HOME/Documents/gitea_backups_workspace"
+# --- Credentials ---
+export AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/b2_creds_gitea"
+# 1. Setup Workspace
+mkdir -p "$WORK_DIR"
+rm -rf "$WORK_DIR"/*
+# 2. Tool Check
+for tool in aws unzip; do
+    if ! command -v "$tool" &>/dev/null; then
+        echo "❌ Missing $tool"
+        exit 1
+    fi
+done
+
+echo "🚀 Fetching backups..."
+LISTING="$(aws s3 ls "s3://$BUCKET/$PREFIX" --endpoint-url "https://$ENDPOINT" | awk '{print $4}' | grep -v '^$')"
+FILES=(${(f)LISTING})
+
+if [ ${#FILES[@]} -eq 0 ]; then
+    echo "❌ No backups found."
+    exit 1
+fi
+
+for i in {1..${#FILES[@]}}; do
+    echo "  [$i] ${FILES[$i]}"
+done
+echo -n "👉 Select number: "
+read -r SELECTION
+
+if ! [[ "$SELECTION" =~ ^[0-9]+$ ]] || [ "$SELECTION" -lt 1 ] || [ "$SELECTION" -gt "${#FILES[@]}" ]; then
+    echo "❌ Invalid selection."
+    exit 1
+fi
+
+FILENAME="${FILES[$SELECTION]}"
+echo "📥 Downloading: $FILENAME to $WORK_DIR..."
+
+TARGET_FOLDER="${FILENAME%.zip}"
+FULL_PATH="$WORK_DIR/$FILENAME"
+EXTRACT_PATH="$WORK_DIR/$TARGET_FOLDER"
+
+aws s3 cp "s3://$BUCKET/$PREFIX$FILENAME" "$FULL_PATH" --endpoint-url "https://$ENDPOINT"
+
+echo "📦 Unpacking dump..."
+rm -rf "$EXTRACT_PATH" && mkdir -p "$EXTRACT_PATH"
+unzip -q -o "$FULL_PATH" -d "$EXTRACT_PATH"
+
+echo "📦 Unpacking dump contents..."
+for PART in data custom gitea-repo; do
+    if [ -f "$EXTRACT_PATH/$PART.zip" ]; then
+        mkdir -p "$EXTRACT_PATH/$PART"
+        unzip -q -o "$EXTRACT_PATH/$PART.zip" -d "$EXTRACT_PATH/$PART"
+        rm -f "$EXTRACT_PATH/$PART.zip"
+    else
+        echo "  ⚠️  $PART.zip not found in dump, skipping"
+    fi
+done
+
+if [ -d "$EXTRACT_PATH" ] && [ "$(ls -A "$EXTRACT_PATH")" ]; then
+    echo "✅ Success! Dump contents are in: $EXTRACT_PATH"
+    rm -f "$FULL_PATH"
+    open "$EXTRACT_PATH"
+else
+    echo "❌ Extraction failed."
+fi

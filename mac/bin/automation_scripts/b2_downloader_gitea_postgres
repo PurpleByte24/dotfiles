@@ -1,0 +1,57 @@
+#!/bin/zsh
+# --- Configuration ---
+ENDPOINT="s3.eu-central-003.backblazeb2.com"
+BUCKET="gitea-instance-backup-bucket"
+PREFIX="gitea-postgres/"
+WORK_DIR="$HOME/Documents/gitea_postgres_backups_workspace"
+# --- Credentials ---
+export AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/b2_creds_gitea"
+# 1. Setup Workspace
+mkdir -p "$WORK_DIR"
+rm -rf "$WORK_DIR"/*
+# 2. Tool Check
+for tool in aws gunzip; do
+    if ! command -v "$tool" &>/dev/null; then
+        echo "❌ Missing $tool"
+        exit 1
+    fi
+done
+
+echo "🚀 Fetching backups..."
+LISTING="$(aws s3 ls "s3://$BUCKET/$PREFIX" --endpoint-url "https://$ENDPOINT" | awk '{print $4}' | grep -v '^$')"
+FILES=(${(f)LISTING})
+
+if [ ${#FILES[@]} -eq 0 ]; then
+    echo "❌ No backups found."
+    exit 1
+fi
+
+for i in {1..${#FILES[@]}}; do
+    echo "  [$i] ${FILES[$i]}"
+done
+echo -n "👉 Select number: "
+read -r SELECTION
+
+if ! [[ "$SELECTION" =~ ^[0-9]+$ ]] || [ "$SELECTION" -lt 1 ] || [ "$SELECTION" -gt "${#FILES[@]}" ]; then
+    echo "❌ Invalid selection."
+    exit 1
+fi
+
+FILENAME="${FILES[$SELECTION]}"
+echo "📥 Downloading: $FILENAME to $WORK_DIR..."
+
+FULL_PATH="$WORK_DIR/$FILENAME"
+SQL_PATH="$WORK_DIR/${FILENAME%.gz}"
+
+aws s3 cp "s3://$BUCKET/$PREFIX$FILENAME" "$FULL_PATH" --endpoint-url "https://$ENDPOINT"
+
+echo "📦 Decompressing dump..."
+gunzip -k -f "$FULL_PATH"
+
+if [ -f "$SQL_PATH" ]; then
+    echo "✅ Success! SQL dump is at: $SQL_PATH"
+    rm -f "$FULL_PATH"
+    open -R "$SQL_PATH"
+else
+    echo "❌ Decompression failed."
+fi
