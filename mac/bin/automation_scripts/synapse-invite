@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+#
+# synapse-invite.sh
+#
+# Mints a single-use, short-lived (1h) Matrix registration token for
+# matrix.purplebytes.net, using the Synapse Admin API. Requires an admin
+# account's credentials (prompted interactively, never stored or logged).
+#
+# Requires: curl, jq
+#
+# The invitee redeems the printed token from their Matrix client's own
+# registration flow (e.g. gomuks, which supports MSC3231 token registration)
+# against server matrix.purplebytes.net.
+
+set -euo pipefail
+
+HOMESERVER="https://matrix.purplebytes.net"
+TOKEN_TTL_MS=$((60 * 60 * 1000))  # 1 hour, in milliseconds (Synapse wants epoch millis)
+
+need() {
+  command -v "$1" >/dev/null 2>&1 || { echo "Error: '$1' is required but not installed." >&2; exit 1; }
+}
+need curl
+need jq
+
+echo "Synapse admin login (${HOMESERVER})"
+read -r -p "Admin username: " ADMIN_USER
+read -r -s -p "Admin password: " ADMIN_PASS
+echo
+
+# --- Step 1: log in as admin to obtain an access token ---------------------
+
+login_payload=$(jq -n \
+  --arg user "$ADMIN_USER" \
+  --arg pass "$ADMIN_PASS" \
+  '{type: "m.login.password", identifier: {type: "m.id.user", user: $user}, password: $pass}')
+
+login_response=$(curl -sS -X POST "${HOMESERVER}/_matrix/client/v3/login" \
+  -H "Content-Type: application/json" \
+  -d "$login_payload")
+
+# Password is no longer needed after this point.
+unset ADMIN_PASS
+
+access_token=$(echo "$login_response" | jq -r '.access_token // empty')
+
+if [[ -z "$access_token" ]]; then
+  echo "Login failed. Server response:" >&2
+  echo "$login_response" | jq . >&2 2>/dev/null || echo "$login_response" >&2
+  exit 1
+fi
+
+echo "Logged in as ${ADMIN_USER}."
+
+# --- Step 2: mint a single-use registration token, expiring in 1h ----------
+
+expiry_time_ms=$(( $(date +%s) * 1000 + TOKEN_TTL_MS ))
+
+mint_payload=$(jq -n \
+  --argjson uses_allowed 1 \
+  --argjson expiry_time "$expiry_time_ms" \
+  '{uses_allowed: $uses_allowed, expiry_time: $expiry_time}')
+
+mint_response=$(curl -sS -X POST "${HOMESERVER}/_synapse/admin/v1/registration_tokens/new" \
+  -H "Authorization: Bearer ${access_token}" \
+  -H "Content-Type: application/json" \
+  -d "$mint_payload")
+
+# Access token is no longer needed after this point.
+unset access_token
+
+token=$(echo "$mint_response" | jq -r '.token // empty')
+
+if [[ -z "$token" ]]; then
+  echo "Token creation failed. Server response:" >&2
+  echo "$mint_response" | jq . >&2 2>/dev/null || echo "$mint_response" >&2
+  exit 1
+fi
+
+echo
+echo "Registration token (single-use, expires in 1h):"
+echo "  ${token}"
+echo
+echo "Server: matrix.purplebytes.net"
