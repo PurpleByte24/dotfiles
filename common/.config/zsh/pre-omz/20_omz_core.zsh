@@ -12,5 +12,7 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
-    fzf-tab
 )
+
+# fzf-tab hijacks Tab; without fzf installed, completion silently breaks.
+(( $+commands[fzf] )) && plugins+=(fzf-tab)
