@@ -4,6 +4,9 @@
 [includeIf "gitdir:~/repos/gitea/"]
   path = ~/.config/git/config-gitea
 
+[includeIf "gitdir:~/repos/gitlab/"]
+  path = ~/.config/git/config-gitlab
+
 [filter "lfs"]
   clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
